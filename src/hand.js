@@ -14,7 +14,7 @@ const Hand = (size) => {
         let low = startIndex;
         let lowCard = getCard(low);
         for (i = startIndex + 1; i < size; i++) {
-            if (Card.comareTo(getCard(i), lowCard) < 0) {
+            if (Card.compareTo(getCard(i), lowCard) < 0) {
                 low = i;
                 lowCard = getCard(i);
             }
