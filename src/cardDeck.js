@@ -9,8 +9,8 @@ const CardDeck = () => {
         let temp;
         for (let s = 0; s < numSuits; s++) {
             for (let f = 0; f < numFaces; f++) {
-                const rS = Math.random() * numSuits;
-                const rF = Math.random() * numFaces;
+                const rS = Math.floor(Math.random() * numSuits);
+                const rF = Math.floor(Math.random() * numFaces);
                 temp = myDeck[s][f];
                 myDeck[s][f] = myDeck[rS][rF];
                 myDeck[rS][rF] = temp;
@@ -27,6 +27,7 @@ const CardDeck = () => {
         }
         return card;
     };
-    return {deal, shuffle};
+    shuffle();
+    return {deal};
 };
 export default CardDeck;
