@@ -15,6 +15,7 @@ class GameLoader extends React.Component {
             suite,
             face
         }))), []);
+        this.images.push(config.defaultImage);
     }
 
     componentDidMount() {
@@ -25,14 +26,17 @@ class GameLoader extends React.Component {
     }
 
     onSuccess() {
-        this.setState({loaded:true})
+        this.setState({loaded: true})
     }
+
     render() {
+        var style = {display: this.state.loaded ? 'none' : 'visible'};
         return (
             <div>
                 <Loader loaded={this.state.loaded}>
                     <Game/>
                 </Loader>
+                <div style={style}>Loading resources</div>
             </div>
         );
     }

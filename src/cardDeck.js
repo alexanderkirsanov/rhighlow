@@ -4,7 +4,6 @@ const CardDeck = () => {
     const numSuits = 4, numFaces = 13;
     let myNextCardSuit = 0, myNextCardFace = 0;
     const myDeck = Array.from(new Array(numSuits), (x, i) => Array.from(new Array(numFaces), (x, n) => Card(n, i)));
-    console.log('ordered deck:' + JSON.stringify(myDeck));
     const shuffle = () => {
         let temp;
         for (let s = 0; s < numSuits; s++) {
@@ -16,7 +15,6 @@ const CardDeck = () => {
                 myDeck[rS][rF] = temp;
             }
         }
-        console.log('shuffled deck:' + JSON.stringify(myDeck));
     };
     const deal = () => {
         const card = myDeck[myNextCardSuit][myNextCardFace];

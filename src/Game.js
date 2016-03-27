@@ -59,12 +59,43 @@ class Game extends React.Component {
 
 
     render() {
+        let message = null;
+        switch (this.state.game) {
+            case 'win':
+                message = 'win! :)';
+                break;
+            case 'loose':
+                message = 'Loose :(';
+                break;
+            default:
+                message = null;
+                break;
+        }
+        const style = {
+            position: 'absolute',
+            top: '40',
+            left: '240',
+            right: '40',
+            bottom: '40',
+            border: '1px solid #ccc',
+            background: '#fff',
+            overflow: 'auto',
+            WebkitOverflowScrolling: 'touch',
+            borderRadius: '4',
+            outline: 'none',
+            padding: 20,
+            width: 250,
+            height: 50,
+            display: message === null ? 'none' : 'block'
+        };
         return (
             <div>
                 <div>{this.state.cardImages.map(x=> <CardComponent suite={x.suit} face={x.face} key={x.index}/>)}</div>
+                <div style={style}>{message}</div>
                 <div>
-                    <Button action={() => this.action('higher')} text='higher'/>
-                    <Button action={() => this.action('lower')} text='lower'/>
+                    <Button disabled={this.state.game !== 'started'} action={() => this.action('higher')}
+                            text='higher'/>
+                    <Button disabled={this.state.game !== 'started'} action={() => this.action('lower')} text='lower'/>
                     <Button action={() => this.setup()} text='restart'/>
                 </div>
             </div>

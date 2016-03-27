@@ -1,9 +1,9 @@
 import React from 'react';
 
 const Button = (props)=> (
-    <div onClick={props.action}>
+    <button disabled = {props.disabled} onClick={props.action}>
         {props.text}
-    </div>
+    </button>
 );
 
 export default Button;
