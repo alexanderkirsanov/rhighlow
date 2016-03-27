@@ -1,5 +1,41 @@
 import Game from './Game';
+import config from './config';
+import Loader from 'react-loader';
+import ImageLoader from './imageLoader';
 import ReactDOM from 'react-dom';
 import React from 'react';
 
-ReactDOM.render(<Game/>, document.getElementById('game'));
+class GameLoader extends React.Component {
+    constructor() {
+        super();
+        this.state = {loaded: false};
+        const concat = Array.prototype.concat;
+        const makeUrl = config.makeUrl;
+        this.images = config.suits.reduce((prev, suite) => concat.call(prev, config.faces.map(face => makeUrl({
+            suite,
+            face
+        }))), []);
+    }
+
+    componentDidMount() {
+        ImageLoader.loadImages(this.images).then(this.onSuccess.bind(this)
+        ).catch((e)=> {
+            console.log(e)
+        })
+    }
+
+    onSuccess() {
+        this.setState({loaded:true})
+    }
+    render() {
+        return (
+            <div>
+                <Loader loaded={this.state.loaded}>
+                    <Game/>
+                </Loader>
+            </div>
+        );
+    }
+}
+
+ReactDOM.render(<GameLoader/>, document.getElementById('game'));

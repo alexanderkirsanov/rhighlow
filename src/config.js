@@ -5,7 +5,10 @@ const makeUrl = (props) => {
         ? `${imagePath}${props.suite}_${props.face}.png`:
         defualtImage;
 };
-
+const faces = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace'];
+const suits = ['hearts', 'clubs', 'spades', 'diamonds'];
 export default {
-    makeUrl
+    makeUrl,
+    faces,
+    suits
 }
