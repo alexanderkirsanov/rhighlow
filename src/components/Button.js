@@ -1,9 +1,9 @@
 import React from 'react';
 
 const Button = (props)=> (
-    <p onClick={props.handleClick}>
-        props.text
-    </p>
+    <div onClick={props.action}>
+        {props.text}
+    </div>
 );
 
 export default Button;
