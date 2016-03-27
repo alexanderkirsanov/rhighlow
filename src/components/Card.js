@@ -1,7 +1,8 @@
 import React from 'react';
+import config from '../config';
 
 const Card = (props)=> (
-    <div>{JSON.stringify(props)}</div>
+    <img src={config.makeUrl(props)}/>
 );
 
 export default Card;
