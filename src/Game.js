@@ -3,7 +3,6 @@ import Hand from './hand';
 import CardComponent from './components/Card';
 import Button from './components/Button';
 import React from 'react';
-import Slider from 'react-slick';
 class Game extends React.Component {
     constructor() {
         super();
@@ -91,10 +90,8 @@ class Game extends React.Component {
         };
         return (
             <div>
-                <Slider>
-                    <div>{this.state.cardImages.map(x=> <CardComponent suite={x.suit} face={x.face}
-                                                                       key={x.index}/>)}</div>
-                </Slider>
+                    {this.state.cardImages.map(x=> <CardComponent suite={x.suit} face={x.face}
+                                                                       key={x.index}/>)}
                 <div style={style}>{message}</div>
                 <div>
                     <Button disabled={this.state.game !== 'started'} action={() => this.action('higher')}
