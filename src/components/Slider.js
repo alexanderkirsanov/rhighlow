@@ -12,7 +12,6 @@ class Slider extends React.Component {
 
     componentDidMount() {
         this.setDimensions();
-        this.bindEvents();
         this.setExternalData();
     }
 
