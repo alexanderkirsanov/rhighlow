@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import tweenState from 'react-tween-state';
 
 class Slider extends React.Component {
     constructor() {
@@ -14,6 +15,55 @@ class Slider extends React.Component {
         this.setDimensions();
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            slideCount: nextProps.children.length
+        });
+        this.setDimensions();
+        if (nextProps.slideIndex !== this.state.currentSlide) {
+            this.goToSlide(nextProps.slideIndex);
+        }
+    }
+
+    goToSlide(index) {
+        var self = this;
+        if (index >= React.Children.count(this.props.children) || index < 0) {
+            return;
+        }
+
+        this.setState({
+            currentSlide: index
+        }, () => {
+            self.animateSlide();
+        });
+    }
+
+    nextSlide() {
+        const childrenCount = React.Children.count(this.props.children);
+        if (this.state.currentSlide >= childrenCount - this.props.slidesToShow) {
+            return;
+        }
+
+        this.goToSlide(Math.min(this.state.currentSlide + this.state.slidesToScroll, childrenCount - this.props.slidesToShow));
+    }
+
+    previousSlide() {
+        if (this.state.currentSlide <= 0) {
+            return;
+        }
+
+        this.goToSlide(Math.max(0, this.state.currentSlide - this.state.slidesToScroll));
+    }
+
+    animateSlide(easing, duration, endValue){
+        this.tweenState(this.props.vertical ? 'top' : 'left', {
+            easing: easing || tweenState.easingTypes[this.props.easing],
+            duration: duration || this.props.speed,
+            endValue: endValue || this.getTargetLeft()
+        });
+    }
+
+    tweenState
     setInitialDimensions() {
         this.setState({
             frameWidth: '100%',
@@ -34,7 +84,6 @@ class Slider extends React.Component {
     setDimensions() {
         var self = this,
             slideWidth,
-            slidesToScroll,
             firstSlide,
             frame,
             frameWidth,
