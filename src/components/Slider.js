@@ -62,8 +62,6 @@ class Slider extends React.Component {
             endValue: endValue || this.getTargetLeft()
         });
     }
-
-    tweenState
     setInitialDimensions() {
         this.setState({
             frameWidth: '100%',
