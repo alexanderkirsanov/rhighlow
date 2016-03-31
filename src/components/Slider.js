@@ -55,13 +55,14 @@ class Slider extends React.Component {
         this.goToSlide(Math.max(0, this.state.currentSlide - this.state.slidesToScroll));
     }
 
-    animateSlide(easing, duration, endValue){
+    animateSlide(easing, duration, endValue) {
         this.tweenState(this.props.vertical ? 'top' : 'left', {
             easing: easing || tweenState.easingTypes[this.props.easing],
             duration: duration || this.props.speed,
             endValue: endValue || this.getTargetLeft()
         });
     }
+
     setInitialDimensions() {
         this.setState({
             frameWidth: '100%',
@@ -120,6 +121,28 @@ class Slider extends React.Component {
         }, () => {
             this.setLeft()
         });
+    }
+
+    formatChildren(children) {
+        return React.Children.map(children, (child, index) => {
+            return <li className='slider-slide' style={this.getSlideStyles()} key={index}>{child}</li>
+        });
+    }
+
+    render() {
+        const children = React.Children.count(this.props.children) > 1 ? this.formatChildren(this.props.children) : this.props.children;
+        return (
+            <div className={['slider', this.props.className || ''].join(' ')} ref="slider"
+                 style={assign(this.getSliderStyles(), this.props.style || {})}>
+                <div className="slider-frame"
+                     ref="frame"
+                     style={this.getFrameStyles()}>
+                    <ul className="slider-list" ref="list" style={this.getListStyles()}>
+                        {children}
+                    </ul>
+                </div>
+            </div>
+        )
     }
 
     getTargetLeft() {
