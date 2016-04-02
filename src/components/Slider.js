@@ -1,6 +1,7 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 import tweenState from 'react-tween-state';
+import assign from 'object-assign';
+
 
 class Slider extends React.Component {
     constructor() {
@@ -56,7 +57,7 @@ class Slider extends React.Component {
     }
 
     animateSlide(easing, duration, endValue) {
-        this.tweenState(this.props.vertical ? 'top' : 'left', {
+        this.tweenState('left', {
             easing: easing || tweenState.easingTypes[this.props.easing],
             duration: duration || this.props.speed,
             endValue: endValue || this.getTargetLeft()
@@ -86,31 +87,21 @@ class Slider extends React.Component {
             firstSlide,
             frame,
             frameWidth,
-            frameHeight,
-            slideHeight;
 
-        frame = this.refs.frame;
+            frame = this.refs.frame;
         firstSlide = frame.childNodes[0].childNodes[0];
         if (firstSlide) {
             firstSlide.style.height = 'auto';
-            slideHeight = firstSlide.offsetHeight * this.props.slidesToShow;
-        } else {
-            slideHeight = 100;
         }
 
         if (typeof this.props.slideWidth !== 'number') {
             slideWidth = parseInt(this.props.slideWidth);
         } else {
-            if (this.props.vertical) {
-                slideWidth = (slideHeight / this.props.slidesToShow) * this.props.slideWidth;
-            } else {
-                slideWidth = (frame.offsetWidth / this.props.slidesToShow) * this.props.slideWidth;
-            }
+            slideWidth = (frame.offsetWidth / this.props.slidesToShow) * this.props.slideWidth;
         }
         slideWidth -= this.props.cellSpacing * ((100 - (100 / this.props.slidesToShow)) / 100);
 
-        frameHeight = slideHeight + ((this.props.cellSpacing / 2) * (this.props.slidesToShow - 1));
-        frameWidth = this.props.vertical ? frameHeight : frame.offsetWidth;
+        frameWidth = frame.offsetWidth;
 
         this.setState({
             frameWidth: frameWidth,
@@ -145,9 +136,73 @@ class Slider extends React.Component {
         )
     }
 
+    getFrameStyles() {
+        return {
+            position: 'relative',
+            display: 'block',
+            overflow: 'hidden',
+            height: 'auto',
+            margin: this.props.framePadding,
+            padding: 0,
+            transform: 'translate3d(0, 0, 0)',
+            WebkitTransform: 'translate3d(0, 0, 0)',
+            msTransform: 'translate(0, 0)',
+            boxSizing: 'border-box',
+            MozBoxSizing: 'border-box'
+        }
+    }
+
+    getListStyles() {
+        var listWidth = this.state.slideWidth * React.Children.count(this.props.children);
+        var spacingOffset = this.props.cellSpacing * React.Children.count(this.props.children);
+        var transform = 'translate3d(' +
+            this.getTweeningValue('left') + 'px, ' +
+            this.getTweeningValue('top') + 'px, 0)';
+        return {
+            transform,
+            WebkitTransform: transform,
+            msTransform: 'translate(' +
+            this.getTweeningValue('left') + 'px, ' +
+            this.getTweeningValue('top') + 'px)',
+            position: 'relative',
+            display: 'block',
+            margin: '0px ' + (this.props.cellSpacing / 2) * -1 + 'px',
+            padding: 0,
+            height: 'auto',
+            width: listWidth + spacingOffset,
+            cursor: this.state.dragging === true ? 'pointer' : 'inherit',
+            boxSizing: 'border-box',
+            MozBoxSizing: 'border-box'
+        }
+    }
+
+    getSliderStyles() {
+        return {
+            position: 'relative',
+            display: 'block',
+            width: this.props.width,
+            height: 'auto',
+            boxSizing: 'border-box',
+            MozBoxSizing: 'border-box',
+            visibility: this.state.slideWidth ? 'visible' : 'hidden'
+        }
+    }
+
     getTargetLeft() {
         const offset = -this.props.cellSpacing * (this.state.currentSlide);
 
         return ((this.state.slideWidth * this.state.currentSlide) - offset) * -1;
     }
 }
+Slider.defaultProps = {
+    cellAlign: 'left',
+    cellSpacing: 0,
+    easing: 'easeOutCirc',
+    slidesToScroll: 1,
+    slidesToShow: 3,
+    slideWidth: 1,
+    speed: 500,
+    width: '100%'
+};
+
+export default Slider;
