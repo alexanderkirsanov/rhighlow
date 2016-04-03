@@ -2,19 +2,15 @@ import React from 'react';
 import tweenState from 'react-tween-state';
 import assign from 'object-assign';
 
-
-class Slider extends React.Component {
-    constructor() {
-        super();
-    }
-
+var Slider = React.createClass({
+    mixins: [tweenState.Mixin],
     componentWillMount() {
         this.setInitialDimensions();
-    }
+    },
 
     componentDidMount() {
         this.setDimensions();
-    }
+    },
 
     componentWillReceiveProps(nextProps) {
         this.setState({
@@ -24,7 +20,7 @@ class Slider extends React.Component {
         if (nextProps.slideIndex !== this.state.currentSlide) {
             this.goToSlide(nextProps.slideIndex);
         }
-    }
+    },
 
     goToSlide(index) {
         var self = this;
@@ -37,7 +33,7 @@ class Slider extends React.Component {
         }, () => {
             self.animateSlide();
         });
-    }
+    },
 
     nextSlide() {
         const childrenCount = React.Children.count(this.props.children);
@@ -46,7 +42,7 @@ class Slider extends React.Component {
         }
 
         this.goToSlide(Math.min(this.state.currentSlide + this.state.slidesToScroll, childrenCount - this.props.slidesToShow));
-    }
+    },
 
     previousSlide() {
         if (this.state.currentSlide <= 0) {
@@ -54,7 +50,7 @@ class Slider extends React.Component {
         }
 
         this.goToSlide(Math.max(0, this.state.currentSlide - this.state.slidesToScroll));
-    }
+    },
 
     animateSlide(easing, duration, endValue) {
         this.tweenState('left', {
@@ -62,7 +58,7 @@ class Slider extends React.Component {
             duration: duration || this.props.speed,
             endValue: endValue || this.getTargetLeft()
         });
-    }
+    },
 
     setInitialDimensions() {
         this.setState({
@@ -72,14 +68,14 @@ class Slider extends React.Component {
         }, () => {
             this.setLeft();
         });
-    }
+    },
 
     setLeft() {
         this.setState({
             left: this.getTargetLeft(),
             top: 0
         })
-    }
+    },
 
     setDimensions() {
         var self = this,
@@ -112,13 +108,13 @@ class Slider extends React.Component {
         }, () => {
             this.setLeft()
         });
-    }
+    },
 
     formatChildren(children) {
         return React.Children.map(children, (child, index) => {
             return <li className='slider-slide' style={this.getSlideStyles()} key={index}>{child}</li>
         });
-    }
+    },
 
     render() {
         const children = React.Children.count(this.props.children) > 1 ? this.formatChildren(this.props.children) : this.props.children;
@@ -134,7 +130,7 @@ class Slider extends React.Component {
                 </div>
             </div>
         )
-    }
+    },
 
     getFrameStyles() {
         return {
@@ -150,7 +146,7 @@ class Slider extends React.Component {
             boxSizing: 'border-box',
             MozBoxSizing: 'border-box'
         }
-    }
+    },
 
     getListStyles() {
         var listWidth = this.state.slideWidth * React.Children.count(this.props.children);
@@ -174,7 +170,7 @@ class Slider extends React.Component {
             boxSizing: 'border-box',
             MozBoxSizing: 'border-box'
         }
-    }
+    },
 
     getSliderStyles() {
         return {
@@ -186,23 +182,40 @@ class Slider extends React.Component {
             MozBoxSizing: 'border-box',
             visibility: this.state.slideWidth ? 'visible' : 'hidden'
         }
-    }
+    },
 
     getTargetLeft() {
         const offset = -this.props.cellSpacing * (this.state.currentSlide);
 
         return ((this.state.slideWidth * this.state.currentSlide) - offset) * -1;
+    },
+    getSlideStyles() {
+        return {
+            display: 'inline-block',
+            listStyleType: 'none',
+            verticalAlign: 'top',
+            width:  this.state.slideWidth,
+            height: 'auto',
+            boxSizing: 'border-box',
+            MozBoxSizing: 'border-box',
+            marginLeft: this.props.cellSpacing / 2,
+            marginRight: this.props.cellSpacing / 2,
+            marginTop:  'auto',
+            marginBottom:  'auto'
+        }
+    },
+    getDefaultProps(){
+        return {
+            cellAlign: 'left',
+            cellSpacing: 0,
+            easing: 'easeOutCirc',
+            slidesToScroll: 1,
+            slidesToShow: 3,
+            slideWidth: 1,
+            speed: 500,
+            width: '100%'
+        }
     }
-}
-Slider.defaultProps = {
-    cellAlign: 'left',
-    cellSpacing: 0,
-    easing: 'easeOutCirc',
-    slidesToScroll: 1,
-    slidesToShow: 3,
-    slideWidth: 1,
-    speed: 500,
-    width: '100%'
-};
+});
 
 export default Slider;
