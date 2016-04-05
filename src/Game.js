@@ -3,7 +3,8 @@ import Hand from './hand';
 import CardComponent from './components/Card';
 import Button from './components/Button';
 import React from 'react';
-import Slider from './components/Slider';
+import ReactCSSTransitionGroup  from 'react-addons-css-transition-group';
+
 class Game extends React.Component {
     constructor() {
         super();
@@ -91,10 +92,12 @@ class Game extends React.Component {
         };
         return (
             <div>
-                <Slider>
+                <ReactCSSTransitionGroup transitionName="animation" transitionEnterTimeout={300}
+                                         transitionLeaveTimeout={300}>
+
                     {this.state.cardImages.map(x=> <CardComponent suite={x.suit} face={x.face}
                                                                   key={x.index}/>)}
-                </Slider>
+                </ReactCSSTransitionGroup>
                 <div style={style}>{message}</div>
                 <div>
                     <Button disabled={this.state.game !== 'started'} action={() => this.action('higher')}
