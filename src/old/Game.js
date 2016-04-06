@@ -1,7 +1,7 @@
 import CardDeck from './../cardDeck';
 import Hand from './../hand';
 import CardComponent from './../components/Card';
-import Button from './../components/Button';
+import Button from './../components/UI';
 import React from 'react';
 import ReactCSSTransitionGroup  from 'react-addons-css-transition-group';
 
