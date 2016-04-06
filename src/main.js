@@ -1,7 +1,7 @@
-import Game from './Game';
+import Game from './old/Game';
 import config from './config';
 import Loader from 'react-loader';
-import ImageLoader from './imageLoader';
+import ImageLoader from './old/imageLoader';
 import ReactDOM from 'react-dom';
 import React from 'react';
 
