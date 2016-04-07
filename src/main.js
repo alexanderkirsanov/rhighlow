@@ -1,6 +1,7 @@
 import {Spinner} from './components/UI';
 import config from './config';
 import ImageLoader from './imageLoader';
+import Game from './game';
 import h from 'hyperscript'
 
 const GameLoader = (element) => {
@@ -10,9 +11,13 @@ const GameLoader = (element) => {
         suite,
         face
     }))), [config.defaultImage]);
-    element.appendChild(Spinner());
+    const spinner = Spinner();
+    element.appendChild(spinner);
     ImageLoader.loadImages(images).then(()=> {
-        h('div#game', h('div'));
+        while (element.firstChild) {
+            element.removeChild(element.firstChild);
+        }
+        Game(element);
     });
 };
 GameLoader(document.getElementById('game'));
