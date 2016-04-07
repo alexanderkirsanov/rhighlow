@@ -14,7 +14,6 @@ const ImageLoader = {
     },
 
     loadImages(urls) {
-        console.log(urls);
         const promises = urls.map(this.loadImage.bind(this));
         return Promise.all(promises);
     }
