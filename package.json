@@ -22,6 +22,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "hyperscript": "^1.4.7",
     "object-assign": "^4.0.1"
   }
 }
