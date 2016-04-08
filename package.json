@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "hyperscript": "^1.4.7",
+    "move-js": "^0.5.0",
     "object-assign": "^4.0.1"
   }
 }
