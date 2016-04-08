@@ -1,4 +1,5 @@
 import {Card} from './UI';
+import move from 'move-js';
 const deck = (element, board) => {
     const getCoordinates = (originalRight, originalWidth, originalHeight) => {
         const ORIGINAL_WIDTH = 1100;
@@ -35,7 +36,7 @@ const deck = (element, board) => {
         return Card(Object.assign(coordinates, {className: 'thirdCard'}));
     };
 
-    const centralCard = () => {
+    const centralCard = ({suite, face}) => {
         const ORIGINAL_RIGHT = 847;
         const ORIGINAL_FIRST_WIDTH = 406;
         const ORIGINAL_FIRST_HEIGHT = 560;
@@ -44,17 +45,18 @@ const deck = (element, board) => {
     };
 
 
-    const bigCard = () => {
+    const bigCard = ({suite, face}) => {
         const ORIGINAL_RIGHT = 483;
         const ORIGINAL_FIRST_WIDTH = 460;
         const ORIGINAL_FIRST_HEIGHT = 633;
         const coordinates = getCoordinates(ORIGINAL_RIGHT, ORIGINAL_FIRST_WIDTH, ORIGINAL_FIRST_HEIGHT);
-        return Card(Object.assign(coordinates, {className: 'bigCard'}));
+        return Card(Object.assign(coordinates, {className: 'bigCard', suite, face}));
     };
 
 
     const render = (state) => {
 
+        window.move = move;
 
         while (element.firstChild) {
             element.removeChild(element.firstChild);

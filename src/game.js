@@ -10,6 +10,9 @@ const Game = (element, size = 5)=> {
     currentDeck.render();
 
     const hand = Hand(size);
+    setTimeout(()=>{
+        currentDeck.render();
+    },100)
     // const setup = () => {
     //     const deck = CardDeck();
     //     for (let i = 0; i < hand.size; i++) {
