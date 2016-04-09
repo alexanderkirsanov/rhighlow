@@ -1,4 +1,4 @@
-import {Card} from './UI';
+import {Card, ActionCard} from './UI';
 import move from 'move-js';
 const deck = (element, board) => {
     const getCoordinates = (originalRight, originalWidth, originalHeight) => {
@@ -42,7 +42,7 @@ const deck = (element, board) => {
         const ORIGINAL_FIRST_WIDTH = 406;
         const ORIGINAL_FIRST_HEIGHT = 560;
         const coordinates = getCoordinates(ORIGINAL_RIGHT, ORIGINAL_FIRST_WIDTH, ORIGINAL_FIRST_HEIGHT);
-        return Card(Object.assign(coordinates, {className: 'centralCard'}));
+        return ActionCard(Object.assign(coordinates, {className: 'centralCard'}));
     };
 
 

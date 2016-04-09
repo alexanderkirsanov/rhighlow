@@ -2,7 +2,6 @@ import {Spinner} from './components/UI';
 import config from './config';
 import ImageLoader from './imageLoader';
 import Game from './game';
-import h from 'hyperscript'
 
 const GameLoader = (element) => {
     const concat = Array.prototype.concat;
