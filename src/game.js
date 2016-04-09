@@ -7,25 +7,29 @@ const Game = (element, size = 5)=> {
         height: element.offsetHeight,
         width: element.offsetWidth
     });
-    currentDeck.render();
+    let nextCard = 0;
+    let state = {};
+    const setup = () => {
+        const deck = CardDeck();
+        const hand = Hand(size);
+        for (let i = 0; i < hand.size; i++) {
+            hand.addCard(deck.deal());
+        }
+        nextCard = 1;
+        const {suite, face} = hand.getCard(0);
+        const images = Array.from({length: size}, (x, i)=> {
+            return {index: i}
+        });
+        images[0] = Object.assign(images[0], {suite, face});
+        state = {cardImages: images, game: 'started'};
+        currentDeck.render(state);
 
-    const hand = Hand(size);
-    setTimeout(()=>{
-        currentDeck.render();
-    },100)
-    // const setup = () => {
-    //     const deck = CardDeck();
-    //     for (let i = 0; i < hand.size; i++) {
-    //         hand.addCard(deck.deal());
-    //     }
-    //     this.nextCard = 1;
-    //     const {suit, face} = hand.getCard(0);
-    //     const images = Array.from({length: size}, (x, i)=> {
-    //         return {index: i}
-    //     });
-    //     images[0] = Object.assign(images[0], {suit, face});
-    //     this.setState({cardImages: images, game: 'started'});
-    // }
+        setTimeout(()=>{
+            currentDeck.render(state);
+        },100)
+    };
+    return {setup};
+
 };
 
 export default Game;

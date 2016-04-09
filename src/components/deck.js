@@ -36,7 +36,8 @@ const deck = (element, board) => {
         return Card(Object.assign(coordinates, {className: 'thirdCard'}));
     };
 
-    const centralCard = ({suite, face}) => {
+    const centralCard = (state = {suite:null, face:null}) => {
+        const {suite, face} = state;
         const ORIGINAL_RIGHT = 847;
         const ORIGINAL_FIRST_WIDTH = 406;
         const ORIGINAL_FIRST_HEIGHT = 560;
@@ -45,7 +46,8 @@ const deck = (element, board) => {
     };
 
 
-    const bigCard = ({suite, face}) => {
+    const bigCard = (state = {suite:null, face:null}) => {
+        const {suite, face} = state;
         const ORIGINAL_RIGHT = 483;
         const ORIGINAL_FIRST_WIDTH = 460;
         const ORIGINAL_FIRST_HEIGHT = 633;
@@ -55,9 +57,9 @@ const deck = (element, board) => {
 
 
     const render = (state) => {
-
-        window.move = move;
-
+        console.log(state);
+        const {cardImages} = state;
+        
         while (element.firstChild) {
             element.removeChild(element.firstChild);
         }
@@ -65,7 +67,7 @@ const deck = (element, board) => {
             secondCard(),
             thirdCard(),
             centralCard(),
-            bigCard()];
+            bigCard(cardImages[0])];
         cards.forEach(card => element.appendChild(card));
 
     };

@@ -3,7 +3,7 @@ const Card = (face, suit) => {
     const {faces, suits} = config;
     return {
         face: faces[face],
-        suit: suits[suit],
+        suite: suits[suit],
         rank: face
     }
 

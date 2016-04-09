@@ -17,7 +17,7 @@ const GameLoader = (element) => {
         while (element.firstChild) {
             element.removeChild(element.firstChild);
         }
-        Game(element);
+        Game(element).setup();
     });
 };
 GameLoader(document.getElementById('game'));
