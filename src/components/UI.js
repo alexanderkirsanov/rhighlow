@@ -1,6 +1,6 @@
 import config from '../config';
 import h from 'hyperscript'
-
+import * as CardItem from '../card';
 
 const Button = (props)=> h(`button.${props.className}`, {onclick: props.onClick});
 const cardStyle = (props)=> {
@@ -34,11 +34,27 @@ const Status = (props) => {
                     h('p', `${opened}/${props.cards.length}`)
                 ]
             ),
-            h('progress.cardProgress', {max:props.cards.length, value: opened})
+            h('progress.cardProgress', {max: props.cards.length, value: opened})
         ]);
 };
 const Info = (props) => {
     return h('div.info', [h('div.logo'), Status(props)]);
+};
+const ProgressInfo = (props) => {
+
+    const items = [];
+    h('div.progressInfo',
+        [
+            h('div.icon', {
+                style: {
+                    'background-image': `url('${props.groupIcon}')`,
+                    'background-repeat': 'no-repeat',
+                    'background-size': '100% 100%'
+                }
+            }),
+            h('div.items', items)
+        ]
+    );
 };
 const Spinner = ()=> {
     const items = [1, 2, 3, 4, 5].map(i=> h(`div.rect${i}`));
