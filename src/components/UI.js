@@ -46,7 +46,7 @@ const Info = (props) => {
 };
 const ProgressInfo = (items, groupIcon) => {
 
-    const createItem = (item) => h(`p.${item.open ? 'opened' : 'notopened'}`, item.face);
+    const createItem = (item) => h(`div.cell.${item.open ? 'opened' : 'notopened'}`, item.face);
     const firstPart = items.filter((x, index)=> {
         return index <= 6
     }).map(createItem);
@@ -63,7 +63,7 @@ const ProgressInfo = (items, groupIcon) => {
                     'background-size': '100% 100%'
                 }
             }),
-            h('div.items', [h('div', ...firstPart), h('div', ...secondPart)])
+            h('div.items', [...firstPart, ...secondPart])
         ]
     );
 };

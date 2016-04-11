@@ -12,7 +12,7 @@ const Game = (element, size = 5)=> {
 
     const initCards = () => cardDeck.getOriginal().map(y=>y.map(x=> {
         return {
-            face: x.face[0].toUpperCase(),
+            face: x.face === '10' ? x.face.toUpperCase() :x.face[0].toUpperCase(),
             opened: false
         }
     }).reverse());
