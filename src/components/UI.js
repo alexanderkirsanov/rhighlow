@@ -42,8 +42,23 @@ const Info = (props) => {
 };
 const ProgressInfo = (props) => {
 
-    const items = [];
-    h('div.progressInfo',
+    const numFaces = 13;
+    const myDeck = Array.from(new Array(numFaces), (x, n) => CardItem.default(n, props.suiteIndex));
+    const items = myDeck.map(x=> {
+        return {
+            face: x.face[0].toUpperCase(),
+            opened: (props.opened || []).indexOf(x.face) !== -1
+        }
+    }).reverse();
+    const createItem = (item) => h(`p.${item.opened ? 'opened' : 'notopened'}`, item.face);
+    const firstPart = items.filter((x, index)=> {
+        return index <= 6
+    }).map(createItem);
+    const secondPart = items.filter((x, index)=> {
+        return index > 6
+    }).map(createItem);
+
+    return h('div.progressInfo',
         [
             h('div.icon', {
                 style: {
@@ -52,7 +67,7 @@ const ProgressInfo = (props) => {
                     'background-size': '100% 100%'
                 }
             }),
-            h('div.items', items)
+            h('div.items', [h('div', ...firstPart), h('div', ...secondPart)])
         ]
     );
 };
@@ -61,4 +76,4 @@ const Spinner = ()=> {
     return h('div.spinner', items);
 };
 
-export {Button, ActionCard, Card, Spinner, Info};
+export {Button, ActionCard, Card, Spinner, ProgressInfo, Info};

@@ -1,4 +1,4 @@
-import {Card, ActionCard} from './UI';
+import {Card, ActionCard, ProgressInfo} from './UI';
 import move from 'move-js';
 const deck = (element, board) => {
     const getCoordinates = (originalLeft, originalWidth, originalHeight) => {
@@ -63,6 +63,7 @@ const deck = (element, board) => {
         while (element.firstChild) {
             element.removeChild(element.firstChild);
         }
+        element.appendChild(ProgressInfo({suiteIndex: 0}));
         const cards = [firstCard(),
             secondCard(),
             thirdCard(),
