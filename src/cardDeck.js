@@ -1,9 +1,12 @@
 import Card from './card';
-
+import clone  from 'clone';
 const CardDeck = () => {
     const numSuits = 4, numFaces = 13;
     let myNextCardSuit = 0, myNextCardFace = 0;
-    const myDeck = Array.from(new Array(numSuits), (x, i) => Array.from(new Array(numFaces), (x, n) => Card(n, i)));
+    const original = Array.from(new Array(numSuits), (x, i) => Array.from(new Array(numFaces), (x, n) => Card(n, i)));
+    const myDeck = clone(original);
+    const getOriginal = () => original;
+
     const shuffle = () => {
         let temp;
         for (let s = 0; s < numSuits; s++) {
@@ -26,6 +29,6 @@ const CardDeck = () => {
         return card;
     };
     shuffle();
-    return {deal};
+    return {deal, getOriginal};
 };
 export default CardDeck;

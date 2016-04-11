@@ -1,4 +1,4 @@
-import {Card, ActionCard, ProgressInfo} from './UI';
+import {Card, ActionCard, ProgressComposite} from './UI';
 import move from 'move-js';
 const deck = (element, board) => {
     const getCoordinates = (originalLeft, originalWidth, originalHeight) => {
@@ -55,7 +55,13 @@ const deck = (element, board) => {
         return Card(Object.assign(coordinates, {className: 'bigCard', suite, face}));
     };
 
-
+    const progressInfo = (state) => {
+        const ORIGINAL_INFO_WIDTH = 295;
+        const ORIGINAL_LEFT = 0;
+        const ORIGINAL_HEIGHT= 700;
+        const coordinates = getCoordinates(ORIGINAL_LEFT, ORIGINAL_INFO_WIDTH, ORIGINAL_HEIGHT);
+        return ProgressComposite(Object.assign(coordinates,  state));
+    };
     const render = (state) => {
         console.log(state);
         const {cardImages} = state;
@@ -63,7 +69,7 @@ const deck = (element, board) => {
         while (element.firstChild) {
             element.removeChild(element.firstChild);
         }
-        element.appendChild(ProgressInfo({suiteIndex: 0}));
+        element.appendChild(progressInfo(state));
         const cards = [firstCard(),
             secondCard(),
             thirdCard(),
@@ -73,6 +79,6 @@ const deck = (element, board) => {
 
     };
     return {render};
-}
+};
 
 export default deck;

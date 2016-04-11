@@ -24,33 +24,29 @@ const Card = (props)=> h('div', cardStyle(props));
 const ActionCard = (props) => h('div', [h('div.high'), h('div.low')], cardStyle(props));
 
 const Status = (props) => {
-    const opened = props.cards.filter(x=>x.open);
+    const flatten = list => list.reduce(
+        (a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), []
+    );
+    const cards = flatten(props.cards);
+    const opened = cards.filter(x=>x.open);
     return h(
         'div.status',
         [
             h('div.firstLine',
                 [
                     h('p', 'Cards'),
-                    h('p', `${opened}/${props.cards.length}`)
+                    h('p', `${opened}/${cards.length}`)
                 ]
             ),
-            h('progress.cardProgress', {max: props.cards.length, value: opened})
+            h('progress.cardProgress', {max: cards.length, value: opened})
         ]);
 };
 const Info = (props) => {
     return h('div.info', [h('div.logo'), Status(props)]);
 };
-const ProgressInfo = (props) => {
+const ProgressInfo = (items, groupIcon) => {
 
-    const numFaces = 13;
-    const myDeck = Array.from(new Array(numFaces), (x, n) => CardItem.default(n, props.suiteIndex));
-    const items = myDeck.map(x=> {
-        return {
-            face: x.face[0].toUpperCase(),
-            opened: (props.opened || []).indexOf(x.face) !== -1
-        }
-    }).reverse();
-    const createItem = (item) => h(`p.${item.opened ? 'opened' : 'notopened'}`, item.face);
+    const createItem = (item) => h(`p.${item.open ? 'opened' : 'notopened'}`, item.face);
     const firstPart = items.filter((x, index)=> {
         return index <= 6
     }).map(createItem);
@@ -62,7 +58,7 @@ const ProgressInfo = (props) => {
         [
             h('div.icon', {
                 style: {
-                    'background-image': `url('${props.groupIcon}')`,
+                    'background-image': `url('${groupIcon}')`,
                     'background-repeat': 'no-repeat',
                     'background-size': '100% 100%'
                 }
@@ -71,9 +67,25 @@ const ProgressInfo = (props) => {
         ]
     );
 };
+const ProgressComposite = (state)=> {
+    const items = [Info(state)];
+    state.cards.forEach((cardSet, index)=> {
+        items.push(ProgressInfo(cardSet, index))
+    });
+    return h('div.progressComposite', items, {
+        style: {
+            position: 'absolute',
+            width: `${state.width}px`,
+            left: '0px',
+            top: '0px',
+            height: `${state.height}px`
+        }
+    })
+};
+
 const Spinner = ()=> {
     const items = [1, 2, 3, 4, 5].map(i=> h(`div.rect${i}`));
     return h('div.spinner', items);
 };
 
-export {Button, ActionCard, Card, Spinner, ProgressInfo, Info};
+export {Button, ActionCard, Card, Spinner, ProgressComposite, Info};
