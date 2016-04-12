@@ -1,8 +1,6 @@
 import config from '../config';
 import h from 'hyperscript'
-import * as CardItem from '../card';
 
-const Button = (props)=> h(`button.${props.className}`, {onclick: props.onClick});
 const cardStyle = (props)=> {
     return {
         style: {
@@ -21,7 +19,30 @@ const cardStyle = (props)=> {
 };
 const Card = (props)=> h('div', cardStyle(props));
 
-const ActionCard = (props) => h('div', [h('div.high'), h('div.low')], cardStyle(props));
+
+const Button = (props)=> h(`div.${props.className}`, h('div', props.label), {
+    onclick: props.onClick,
+    style: {
+        width: props.width,
+        height: props.height
+    }
+});
+
+const ActionCard = (props) => {
+    const originalWidth =  406;
+    const buttonWidth = 180;
+    const buttonHeight = 80;
+    const right = 110;
+    const hightTop = 230;
+    const lowTop = 325;
+    const recommendedTop = 445;
+    const scale = props.width/originalWidth;
+    const high = Button({
+        className: 'high',
+        width: scale
+    })
+    return h('div', [h('div.high'), h('div.low')], cardStyle(props))
+};
 
 const Status = (props) => {
     const flatten = list => list.reduce(
@@ -42,13 +63,13 @@ const Status = (props) => {
         ]);
 };
 const Info = (scale, props) => {
-    const height = 192 * scale;
+    const height = Math.ceil(192 * scale);
     return h('div.info', [h('div.logo', {style: {height: `${height}px`}}), Status(props)]);
 };
 const ProgressInfo = (scale, items, groupIcon) => {
 
     const createItem = (item) => h(`div.cell.${item.open ? 'opened' : 'notopened'}`, item.face, {
-        style: {height: `${25 * scale}px`}
+        style: {height: `${Math.ceil(25 * scale)}px`}
     });
     const firstPart = items.filter((x, index)=> {
         return index <= 6
@@ -61,8 +82,8 @@ const ProgressInfo = (scale, items, groupIcon) => {
         [
             h('div.icon', {
                 style: {
-                    width: `${scale * 50}px`,
-                    height: `${scale * 50}px`,
+                    width: `${Math.ceil(scale * 50)}px`,
+                    height: `${Math.ceil(scale * 50)}px`,
                     'background-image': `url('resources/images/card-type-${groupIcon}.png')`,
                     'background-repeat': 'no-repeat',
                     'background-size': '100% 100%'
