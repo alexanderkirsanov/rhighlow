@@ -75,7 +75,7 @@ const Status = (props) => {
         (a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), []
     );
     const cards = flatten(props.cards);
-    const opened = cards.filter(x=>x.open);
+    const opened = cards.filter(x=>x.opened);
     return h(
         'div.status',
         [
@@ -85,7 +85,7 @@ const Status = (props) => {
                     h('p', `${opened}/${cards.length}`)
                 ]
             ),
-            h('progress.cardProgress', {max: cards.length, value: opened})
+            h('progress.cardProgress', {max: cards.length, value: opened.length})
         ]);
 };
 const Info = (scale, props) => {
@@ -94,7 +94,7 @@ const Info = (scale, props) => {
 };
 const ProgressInfo = (scale, items, groupIcon) => {
 
-    const createItem = (item) => h(`div.cell.${item.open ? 'opened' : 'notopened'}`, item.face, {
+    const createItem = (item) => h(`div.cell.${item.opened ? 'opened' : 'notopened'}`, item.face, {
         style: {height: `${Math.ceil(25 * scale)}px`}
     });
     const firstPart = items.filter((x, index)=> {
