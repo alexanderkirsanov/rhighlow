@@ -7,8 +7,10 @@ const makeUrl = (props) => {
 };
 const faces = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace'];
 const suits = ['spades', 'hearts', 'diamonds', 'clubs'];
+const getIndexByName = (name) => suits.indexOf(name);
 export default {
     makeUrl,
+    getIndexByName,
     faces,
     suits,
     defaultImage

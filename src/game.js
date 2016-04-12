@@ -1,16 +1,21 @@
 import CardDeck from './cardDeck';
 import Hand from './hand';
 import deck from './components/deck';
+import config from './config';
 const Game = (element, size = 52)=> {
     let nextCard = 0;
     let state = {};
     const cardDeck = CardDeck();
     const hand = Hand(size);
-
+    const openCard = (suite, face) => {
+        const index = config.getIndexByName(suite);
+        state.cards[index].filter(card=>card.face === face).forEach(card=>card.opened = true);
+    };
     const processAction = (action)=> {
         const {suite, face, rank} = hand.getCard(nextCard);
         const images = state.cardImages;
         images[1] = Object.assign(images[1], {suite, face});
+        openCard(suite, face);
         const rank1 = hand.getCard((nextCard - 1)).rank;
         if (action === 'lower') {
             if (rank <= rank1) {
@@ -64,6 +69,7 @@ const Game = (element, size = 52)=> {
         });
         images[0] = Object.assign(images[0], {suite, face});
         state = {cardImages: images, game: 'started', cards: initCards()};
+        openCard(suite, face);
         currentDeck.render(state);
     };
     return {setup};
