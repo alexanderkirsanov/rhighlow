@@ -82,7 +82,7 @@ const Status = (props) => {
             h('div.firstLine',
                 [
                     h('p', 'Cards'),
-                    h('p', `${opened}/${cards.length}`)
+                    h('p', `${opened.length}/${cards.length}`)
                 ]
             ),
             h('progress.cardProgress', {max: cards.length, value: opened.length})
