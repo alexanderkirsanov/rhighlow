@@ -20,28 +20,54 @@ const cardStyle = (props)=> {
 const Card = (props)=> h('div', cardStyle(props));
 
 
-const Button = (props)=> h(`div.${props.className}`, h('div', props.label), {
+const Button = (props)=> h(`div.button.${props.className}`, h('div', props.label), {
     onclick: props.onClick,
     style: {
-        width: props.width,
-        height: props.height
+        position: 'absolute',
+        width: `${Math.ceil(props.width)}px`,
+        height: `${Math.ceil(props.height)}px`,
+        top: `${Math.ceil(props.top)}px`,
+        left: `${Math.ceil(props.left)}px`
     }
 });
 
 const ActionCard = (props) => {
     const originalWidth =  406;
+    const originalHeight =  560;
     const buttonWidth = 180;
     const buttonHeight = 80;
     const right = 110;
-    const hightTop = 230;
+    const highTop = 230;
     const lowTop = 325;
-    const recommendedTop = 445;
-    const scale = props.width/originalWidth;
-    const high = Button({
+    const recommendedTop = 440;
+    const scaleW = props.width/originalWidth;
+    const scaleH = props.height/originalHeight;
+    const buttonCoords = {
+        width: scaleW * buttonWidth,
+        height: scaleH * buttonHeight,
+        left: scaleW * (originalWidth-right-buttonWidth)
+    };
+    const high = Button(Object.assign(buttonCoords, {
+        onClick: props.highClick,
         className: 'high',
-        width: scale
-    })
-    return h('div', [h('div.high'), h('div.low')], cardStyle(props))
+        label: 'HIGH',
+        top: highTop * scaleH
+    }));
+    const low = Button(Object.assign(buttonCoords, {
+        onClick: props.lowClick,
+        className: 'low',
+        label: 'LOW',
+        top: lowTop * scaleH
+    }));
+
+    const recommend = Button(Object.assign(buttonCoords, {
+        onClick: props.recommendClick,
+        className: 'recommend',
+        label: 'recommended action',
+        top: recommendedTop * scaleH
+    }));
+
+    return h('div', [high, low, recommend], cardStyle(props))
 };
 
 const Status = (props) => {

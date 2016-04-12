@@ -36,13 +36,13 @@ const deck = (element, board) => {
         return Card(Object.assign(coordinates, {className: 'thirdCard'}));
     };
 
-    const centralCard = (state = {suite:null, face:null}) => {
+    const centralCard = (state = {suite:null, face:null}, action={}) => {
         const {suite, face} = state;
         const ORIGINAL_FIRST_WIDTH = 406;
         const ORIGINAL_LEFT = 978-ORIGINAL_FIRST_WIDTH;
         const ORIGINAL_FIRST_HEIGHT = 560;
         const coordinates = getCoordinates(ORIGINAL_LEFT, ORIGINAL_FIRST_WIDTH, ORIGINAL_FIRST_HEIGHT);
-        return ActionCard(Object.assign(coordinates, {className: 'centralCard'}));
+        return ActionCard(Object.assign(coordinates, {className: 'centralCard'}, action));
     };
 
 
@@ -70,10 +70,15 @@ const deck = (element, board) => {
             element.removeChild(element.firstChild);
         }
         element.appendChild(progressInfo(state));
+        const action = {
+            recommendClick: ()=>alert('recommend'),
+            highClick: ()=>alert('high'),
+            lowClick: ()=> alert('low')
+        };
         const cards = [firstCard(),
             secondCard(),
             thirdCard(),
-            centralCard(),
+            centralCard(cardImages[1], action),
             bigCard(cardImages[0])];
         cards.forEach(card => element.appendChild(card));
 

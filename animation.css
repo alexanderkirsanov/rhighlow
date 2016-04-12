@@ -77,8 +77,20 @@
     text-align: center;
     background: #eee;
 }
-.logo {
 
+.logo {
     background: url('resources/images/logo-bg.png') no-repeat;
     background-size: cover;
+}
+
+.button {
+    cursor: pointer;
+}
+
+.high {
+    background-color: #e85d45;
+}
+
+.low {
+    background-color: #a1ce3c;
 }
