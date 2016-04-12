@@ -1,6 +1,6 @@
 import {Card, ActionCard, ProgressComposite} from './UI';
 import move from 'move-js';
-const deck = (element, board) => {
+const deck = (element, board, action) => {
     const getCoordinates = (originalLeft, originalWidth, originalHeight) => {
         const ORIGINAL_WIDTH = 1100;
         const ORIGINAL_HEIGHT = 700;
@@ -70,11 +70,7 @@ const deck = (element, board) => {
             element.removeChild(element.firstChild);
         }
         element.appendChild(progressInfo(state));
-        const action = {
-            recommendClick: ()=>alert('recommend'),
-            highClick: ()=>alert('high'),
-            lowClick: ()=> alert('low')
-        };
+    
         const cards = [firstCard(),
             secondCard(),
             thirdCard(),
