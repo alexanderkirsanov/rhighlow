@@ -64,6 +64,7 @@
 
 .progressInfo {
     display: flex;
+    padding: 0 25px 10px 25px;
 }
 
 .progressComposite {
@@ -75,4 +76,9 @@
     width: 14%;
     text-align: center;
     background: #eee;
+}
+.logo {
+
+    background: url('resources/images/logo-bg.png') no-repeat;
+    background-size: cover;
 }

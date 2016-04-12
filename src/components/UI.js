@@ -41,12 +41,15 @@ const Status = (props) => {
             h('progress.cardProgress', {max: cards.length, value: opened})
         ]);
 };
-const Info = (props) => {
-    return h('div.info', [h('div.logo'), Status(props)]);
+const Info = (scale, props) => {
+    const height = 192 * scale;
+    return h('div.info', [h('div.logo', {style: {height: `${height}px`}}), Status(props)]);
 };
-const ProgressInfo = (items, groupIcon) => {
+const ProgressInfo = (scale, items, groupIcon) => {
 
-    const createItem = (item) => h(`div.cell.${item.open ? 'opened' : 'notopened'}`, item.face);
+    const createItem = (item) => h(`div.cell.${item.open ? 'opened' : 'notopened'}`, item.face, {
+        style: {height: `${25 * scale}px`}
+    });
     const firstPart = items.filter((x, index)=> {
         return index <= 6
     }).map(createItem);
@@ -58,7 +61,9 @@ const ProgressInfo = (items, groupIcon) => {
         [
             h('div.icon', {
                 style: {
-                    'background-image': `url('${groupIcon}')`,
+                    width: `${scale * 50}px`,
+                    height: `${scale * 50}px`,
+                    'background-image': `url('resources/images/card-type-${groupIcon}.png')`,
                     'background-repeat': 'no-repeat',
                     'background-size': '100% 100%'
                 }
@@ -68,9 +73,11 @@ const ProgressInfo = (items, groupIcon) => {
     );
 };
 const ProgressComposite = (state)=> {
-    const items = [Info(state)];
+    const ORIGINAL_WIDTH = 295;
+    const scale = state.width / ORIGINAL_WIDTH;
+    const items = [Info(scale, state)];
     state.cards.forEach((cardSet, index)=> {
-        items.push(ProgressInfo(cardSet, index))
+        items.push(ProgressInfo(scale, cardSet, index))
     });
     return h('div.progressComposite', items, {
         style: {

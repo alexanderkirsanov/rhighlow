@@ -1,7 +1,7 @@
 import CardDeck from './cardDeck';
 import Hand from './hand';
 import deck from './components/deck';
-const Game = (element, size = 5)=> {
+const Game = (element, size = 52)=> {
     const currentDeck = deck(element, {
         height: element.offsetHeight,
         width: element.offsetWidth
