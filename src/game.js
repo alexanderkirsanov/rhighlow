@@ -8,13 +8,14 @@ const Game = (element, size = 52)=> {
     const hand = Hand(size);
 
     const processAction = (action)=> {
-        const {suit, face, rank} = this.hand.getCard(nextCard);
+        const {suite, face, rank} = hand.getCard(nextCard);
         const images = state.cardImages;
-        images[nextCard] = Object.assign(images[nextCard], {suit, face});
+        images[1] = Object.assign(images[1], {suite, face});
         const rank1 = hand.getCard((nextCard - 1)).rank;
         if (action === 'lower') {
             if (rank <= rank1) {
                 nextCard++;
+                images.shift();
             } else {
                 Object.assign(state, {game: 'loose'});
             }
@@ -22,6 +23,7 @@ const Game = (element, size = 52)=> {
         if (action === 'higher') {
             if (rank >= rank1) {
                 nextCard++;
+                images.shift();
             } else {
                 Object.assign(state, {game: 'loose'})
             }
@@ -35,8 +37,8 @@ const Game = (element, size = 52)=> {
     };
     const action = {
         recommendClick: ()=>alert('recommend'),
-        highClick: ()=>processAction('high'),
-        lowClick: ()=> processAction('low')
+        highClick: ()=>processAction('higher'),
+        lowClick: ()=> processAction('lower')
     };
     const currentDeck = deck(element, {
         height: element.offsetHeight,
