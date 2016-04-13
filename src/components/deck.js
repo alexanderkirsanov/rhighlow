@@ -62,6 +62,9 @@ const deck = (element, board, action) => {
         const coordinates = getCoordinates(ORIGINAL_LEFT, ORIGINAL_INFO_WIDTH, ORIGINAL_HEIGHT);
         return ProgressComposite(Object.assign(coordinates, state));
     };
+    const afterAnimation = () =>{
+
+    };
     const render = (state) => {
         console.log(state);
         const {cardImages} = state;
