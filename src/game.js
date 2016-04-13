@@ -64,10 +64,12 @@ const Game = (element, size = 52)=> {
         }
         nextCard = 1;
         const {suite, face} = hand.getCard(0);
+        const secretCard = hand.getCard(1);
         const images = Array.from({length: size}, (x, i)=> {
             return {index: i}
         });
         images[0] = Object.assign(images[0], {suite, face});
+        images[1] = Object.assign(images[1], secretCard);
         state = {cardImages: images, game: 'started', cards: initCards()};
         openCard(suite, face);
         currentDeck.render(state);

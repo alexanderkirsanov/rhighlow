@@ -30,23 +30,23 @@ const deck = (element, board, action) => {
 
     const thirdCard = () => {
         const ORIGINAL_FIRST_WIDTH = 325;
-        const ORIGINAL_LEFT = 1025- ORIGINAL_FIRST_WIDTH;
+        const ORIGINAL_LEFT = 1025 - ORIGINAL_FIRST_WIDTH;
         const ORIGINAL_FIRST_HEIGHT = 450;
         const coordinates = getCoordinates(ORIGINAL_LEFT, ORIGINAL_FIRST_WIDTH, ORIGINAL_FIRST_HEIGHT);
         return Card(Object.assign(coordinates, {className: 'thirdCard'}));
     };
 
-    const centralCard = (state = {suite:null, face:null}, action={}) => {
+    const centralCard = (state = {suite: null, face: null}, action = {}) => {
         const {suite, face} = state;
         const ORIGINAL_FIRST_WIDTH = 406;
-        const ORIGINAL_LEFT = 978-ORIGINAL_FIRST_WIDTH;
+        const ORIGINAL_LEFT = 978 - ORIGINAL_FIRST_WIDTH;
         const ORIGINAL_FIRST_HEIGHT = 560;
         const coordinates = getCoordinates(ORIGINAL_LEFT, ORIGINAL_FIRST_WIDTH, ORIGINAL_FIRST_HEIGHT);
-        return ActionCard(Object.assign(coordinates, {className: 'centralCard'}, action));
+        return ActionCard(Object.assign(coordinates, {className: 'centralCard', suite, face}, action));
     };
 
 
-    const bigCard = (state = {suite:null, face:null}) => {
+    const bigCard = (state = {suite: null, face: null}) => {
         const {suite, face} = state;
         const ORIGINAL_FIRST_WIDTH = 460;
         const ORIGINAL_LEFT = 640 - ORIGINAL_FIRST_WIDTH;
@@ -58,26 +58,28 @@ const deck = (element, board, action) => {
     const progressInfo = (state) => {
         const ORIGINAL_INFO_WIDTH = 295;
         const ORIGINAL_LEFT = 0;
-        const ORIGINAL_HEIGHT= 700;
+        const ORIGINAL_HEIGHT = 700;
         const coordinates = getCoordinates(ORIGINAL_LEFT, ORIGINAL_INFO_WIDTH, ORIGINAL_HEIGHT);
-        return ProgressComposite(Object.assign(coordinates,  state));
+        return ProgressComposite(Object.assign(coordinates, state));
     };
     const render = (state) => {
         console.log(state);
         const {cardImages} = state;
-        
+        // $(".card").flip(false);
+
         while (element.firstChild) {
             element.removeChild(element.firstChild);
         }
         element.appendChild(progressInfo(state));
-    
+
         const cards = [firstCard(),
             secondCard(),
             thirdCard(),
             centralCard(cardImages[1], action),
             bigCard(cardImages[0])];
         cards.forEach(card => element.appendChild(card));
-
+        $(".card").flip({autoSize: false, trigger: 'manual'});
+        $(".card").flip(true);
     };
     return {render};
 };
