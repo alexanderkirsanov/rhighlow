@@ -19,6 +19,7 @@ const cardStyle = (props)=> {
 };
 const Card = (props)=> h('div', cardStyle(props));
 
+const Score = (props)=> h('div',[h('div.scoreTitle', 'Score'), h('div.score', props.score)]);
 
 const Button = (props)=> h(`div.button.${props.className}`, h('div', props.label), {
     onclick: props.onClick,
@@ -76,7 +77,7 @@ const ActionCard = (props) => {
             height: `${props.height}px`,
             'background-image': `url('${config.makeUrl({})}')`,
             'background-repeat': 'no-repeat',
-            'background-size': '100% 100%',
+            'background-size': '100% 100%'
         }
     }), h('div.front', {
         style: {
@@ -153,6 +154,7 @@ const ProgressComposite = (state)=> {
     state.cards.forEach((cardSet, index)=> {
         items.push(ProgressInfo(scale, cardSet, index))
     });
+    items.push(Score(state));
     return h('div.progressComposite', items, {
         style: {
             position: 'absolute',

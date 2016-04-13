@@ -21,6 +21,7 @@ const Game = (element, size = 52)=> {
             if (rank <= rank1) {
                 nextCard++;
                 images.shift();
+                state.score += 100;
             } else {
                 Object.assign(state, {game: 'loose'});
             }
@@ -29,13 +30,16 @@ const Game = (element, size = 52)=> {
             if (rank >= rank1) {
                 nextCard++;
                 images.shift();
+                state.score += 100;
             } else {
                 Object.assign(state, {game: 'loose'})
             }
         }
+        const secretCard = hand.getCard(nextCard);
+        images[1] = Object.assign(images[1], secretCard);
         Object.assign(state, {cardImages: images});
         currentDeck.render(state);
-        if (nextCard === 5) {
+        if (nextCard % 5 === 0) {
             Object.assign(state, {game: 'win'});
         }
         currentDeck.render(state);
@@ -70,7 +74,7 @@ const Game = (element, size = 52)=> {
         });
         images[0] = Object.assign(images[0], {suite, face});
         images[1] = Object.assign(images[1], secretCard);
-        state = {cardImages: images, game: 'started', cards: initCards()};
+        state = {cardImages: images, game: 'started', cards: initCards(), score: 0};
         openCard(suite, face);
         currentDeck.render(state);
     };

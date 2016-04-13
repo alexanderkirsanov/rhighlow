@@ -62,27 +62,37 @@ const deck = (element, board, action) => {
         const coordinates = getCoordinates(ORIGINAL_LEFT, ORIGINAL_INFO_WIDTH, ORIGINAL_HEIGHT);
         return ProgressComposite(Object.assign(coordinates, state));
     };
-    const afterAnimation = () =>{
-
-    };
     const render = (state) => {
-        console.log(state);
         const {cardImages} = state;
-        // $(".card").flip(false);
+        const draw = () => {
+            while (element.firstChild) {
+                element.removeChild(element.firstChild);
+            }
+            element.appendChild(progressInfo(state));
 
-        while (element.firstChild) {
-            element.removeChild(element.firstChild);
+            const cards = [firstCard(),
+                secondCard(),
+                thirdCard(),
+                centralCard(cardImages[1], action),
+                bigCard(cardImages[0])];
+            cards.forEach(card => element.appendChild(card));
+            const card = $(".card");
+            card.flip({autoSize: false, trigger: 'manual'});
+            card.flip(true);
+        };
+        console.log(state);
+        if (state.game === 'started') {
+            if (state.cardImages.length < 52) {
+                $(".card").flip(false);
+                setTimeout(()=> {
+                    draw()
+                }, 600);
+            } else {
+                draw()
+            }
+        } else if (state.game === 'loosed'){
+
         }
-        element.appendChild(progressInfo(state));
-
-        const cards = [firstCard(),
-            secondCard(),
-            thirdCard(),
-            centralCard(cardImages[1], action),
-            bigCard(cardImages[0])];
-        cards.forEach(card => element.appendChild(card));
-        $(".card").flip({autoSize: false, trigger: 'manual'});
-        $(".card").flip(true);
     };
     return {render};
 };
