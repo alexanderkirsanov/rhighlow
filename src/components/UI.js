@@ -19,7 +19,7 @@ const cardStyle = (props)=> {
 };
 const Card = (props)=> h('div', cardStyle(props));
 
-const Score = (props)=> h('div',[h('div.scoreTitle', 'Score'), h('div.score', props.score)]);
+const Score = (props)=> h('div', [h('div.scoreTitle', 'Score'), h('div.score', props.score)]);
 
 const Button = (props)=> h(`div.button.${props.className}`, h('div', props.label), {
     onclick: props.onClick,
@@ -87,15 +87,17 @@ const ActionCard = (props) => {
             width: `${props.width}px`,
             height: `${props.height}px`
         }
-    })], {style:{
-        position: 'absolute',
-        width: `${props.width}px`,
-        left: `${props.left}px`,
-        top: `${props.top}px`,
-        'border-radius': '3%',
-        overflow: 'hidden',
-        height: `${props.height}px`
-    }});
+    })], {
+        style: {
+            position: 'absolute',
+            width: `${props.width}px`,
+            left: `${props.left}px`,
+            top: `${props.top}px`,
+            'border-radius': '3%',
+            overflow: 'hidden',
+            height: `${props.height}px`
+        }
+    });
 };
 
 const Status = (props) => {
@@ -122,7 +124,8 @@ const Info = (scale, props) => {
 };
 const ProgressInfo = (scale, items, groupIcon) => {
 
-    const createItem = (item) => h(`div.cell.${item.opened ? 'opened' : 'notopened'}`, item.face, {
+    const color = groupIcon === 0 || groupIcon === 3 ? 'black' : 'red';
+    const createItem = (item) => h(`div.color-${color}.cell.${item.opened ? 'opened' : 'notopened'}`, item.face, {
         style: {height: `${Math.ceil(25 * scale)}px`}
     });
     const firstPart = items.filter((x, index)=> {
