@@ -81,6 +81,7 @@ const deck = (element, board, action) => {
             card.flip(true);
         };
         console.log(state);
+        console.log(state.cardImages[1]);
         if (state.game === 'started') {
             if (state.cardImages.length < 52) {
                 $(".card").flip(false);
@@ -88,7 +89,7 @@ const deck = (element, board, action) => {
                     draw()
                 }, 600);
             } else {
-                draw()
+                draw();
             }
         } else if (state.game === 'loosed'){
 

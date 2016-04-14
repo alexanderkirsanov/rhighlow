@@ -9,6 +9,7 @@ const Game = (element, size = 52)=> {
     const hand = Hand(size);
     const openCard = (suite, face) => {
         const index = config.getIndexByName(suite);
+        face = face !== "10"? face[0] : face;
         state.cards[index].filter(card=>card.face === face).forEach(card=>card.opened = true);
     };
     const processAction = (action)=> {
@@ -40,7 +41,7 @@ const Game = (element, size = 52)=> {
         Object.assign(state, {cardImages: images});
         currentDeck.render(state);
         if (nextCard % 5 === 0) {
-            Object.assign(state, {game: 'win'});
+            // Object.assign(state, {game: 'win'});
         }
         currentDeck.render(state);
     };

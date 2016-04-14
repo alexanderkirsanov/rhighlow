@@ -99,7 +99,16 @@ const ActionCard = (props) => {
         }
     });
 };
-
+const Progress = (cardLength, openedLength) => {
+    //max: cards.length, value: opened.length
+    return h('div.cardProgress', [
+        h('div.progressBack', [
+            h('div.progressFront', {
+                style: {width: `${openedLength/cardLength*100}%`}
+            })
+        ])]
+    );
+};
 const Status = (props) => {
     const flatten = list => list.reduce(
         (a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), []
@@ -115,7 +124,7 @@ const Status = (props) => {
                     h('p', `${opened.length}/${cards.length}`)
                 ]
             ),
-            h('progress.cardProgress', {max: cards.length, value: opened.length})
+            Progress(cards.length,opened.length)
         ]);
 };
 const Info = (scale, props) => {

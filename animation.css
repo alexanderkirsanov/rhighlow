@@ -94,3 +94,32 @@
 .low {
     background-color: #a1ce3c;
 }
+.progressBack{
+    height: 5px;
+}
+.progressFront{
+    height: 5px;
+    background-color: #00d6b2;
+}
+@font-face {
+    font-family: 'RubrikBold';
+    src: url('resources/font/RubrikBold.otf') format('opentype');
+    font-weight: bold;
+}
+@font-face {
+    font-family: 'RubrikExtraLight';
+    src: url('resources/font/RubrikExtraLight.otf') format('opentype');
+    font-weight: bold;
+}
+@font-face {
+    font-family: 'RubrikRegular';
+    src: url('resources/font/RubrikRegular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'RubrikMedium';
+    src: url('resources/font/RubrikMedium.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
