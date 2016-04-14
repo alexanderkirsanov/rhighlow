@@ -1,3 +1,26 @@
+@font-face {
+    font-family: 'RubrikBold';
+    src: url('resources/font/RubrikBold.otf') format('opentype');
+    font-weight: bold;
+}
+@font-face {
+    font-family: 'RubrikExtraLight';
+    src: url('resources/font/RubrikExtraLight.otf') format('opentype');
+    font-weight: bold;
+}
+@font-face {
+    font-family: 'RubrikRegular';
+    src: url('resources/font/RubrikRegular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'RubrikMedium';
+    src: url('resources/font/RubrikMedium.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .spinner {
     margin: 100px auto;
     width: 50px;
@@ -62,20 +85,19 @@
     flex: 1
 }
 
-.progressInfo {
-    display: flex;
-    padding: 0 25px 10px 25px;
-}
 
-.progressComposite {
-    z-index: 50;
-    background-color: #020202;
-}
 
-.cell {
-    width: 14%;
-    text-align: center;
-    background: #eee;
+.color-black.notopened{
+    color: #181818;
+}
+.color-black.opened{
+    color: #6b6e73;
+}
+.color-red.notopened{
+    color: #2b1410;
+}
+.color-red.opened{
+    color: #f66344;
 }
 
 .logo {
@@ -94,32 +116,50 @@
 .low {
     background-color: #a1ce3c;
 }
+
+.progressInfo {
+    display: flex;
+    padding: 25px 25px 10px 25px;
+}
+
+.progressComposite {
+    z-index: 50;
+    background-color: #020202;
+}
+.firstLine{
+    padding: 0 25px;
+}
+span.cardTitle{
+    display: inline;
+    color: #5d5d5d;
+    font-family: RubrikSemiBold;
+}
+
+span.cardStats{
+    display: inline;
+    float: right;
+    color: #f4f4f4;
+    font-family: RubrikSemiBold;
+}
+
+.cardProgress {
+    padding: 0 25px;
+}
 .progressBack{
     height: 5px;
+    background-color: #00d6b2;
+
 }
+
+.cell {
+    width: 14%;
+    text-align: center;
+    background: #020202;
+    font-family: RubrikSemiBold;
+}
+
 .progressFront{
     height: 5px;
-    background-color: #00d6b2;
-}
-@font-face {
-    font-family: 'RubrikBold';
-    src: url('resources/font/RubrikBold.otf') format('opentype');
-    font-weight: bold;
-}
-@font-face {
-    font-family: 'RubrikExtraLight';
-    src: url('resources/font/RubrikExtraLight.otf') format('opentype');
-    font-weight: bold;
-}
-@font-face {
-    font-family: 'RubrikRegular';
-    src: url('resources/font/RubrikRegular.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'RubrikMedium';
-    src: url('resources/font/RubrikMedium.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
+    float: right;
+    background-color: #000;
 }

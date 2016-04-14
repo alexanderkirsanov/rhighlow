@@ -104,12 +104,14 @@ const Progress = (cardLength, openedLength) => {
     return h('div.cardProgress', [
         h('div.progressBack', [
             h('div.progressFront', {
-                style: {width: `${openedLength/cardLength*100}%`}
+                style: {
+                    width: `${100 - (openedLength / cardLength) * 100}%`
+                }
             })
         ])]
     );
 };
-const Status = (props) => {
+const Status = (scale, props) => {
     const flatten = list => list.reduce(
         (a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), []
     );
@@ -120,22 +122,25 @@ const Status = (props) => {
         [
             h('div.firstLine',
                 [
-                    h('p', 'Cards'),
-                    h('p', `${opened.length}/${cards.length}`)
+                    h('span.cardTitle', 'Cards', {style: `font-size:${Math.ceil(scale * 13)}`}),
+                    h('span.cardStats', `${opened.length}/${cards.length}`, {style: `font-size:${Math.ceil(scale * 13)}`})
                 ]
             ),
-            Progress(cards.length,opened.length)
+            Progress(cards.length, opened.length)
         ]);
 };
 const Info = (scale, props) => {
     const height = Math.ceil(192 * scale);
-    return h('div.info', [h('div.logo', {style: {height: `${height}px`}}), Status(props)]);
+    return h('div.info', [h('div.logo', {style: {height: `${height}px`}}), Status(scale, props)]);
 };
 const ProgressInfo = (scale, items, groupIcon) => {
 
     const color = groupIcon === 0 || groupIcon === 3 ? 'black' : 'red';
     const createItem = (item) => h(`div.color-${color}.cell.${item.opened ? 'opened' : 'notopened'}`, item.face, {
-        style: {height: `${Math.ceil(25 * scale)}px`}
+        style: {
+            height: `${Math.ceil(25 * scale)}px`,
+            'font-size': `${Math.ceil(20 * scale)}px`
+        }
     });
     const firstPart = items.filter((x, index)=> {
         return index <= 6
