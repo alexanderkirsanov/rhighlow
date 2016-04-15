@@ -216,4 +216,4 @@ const Spinner = ()=> {
     return h('div.spinner', items);
 };
 
-export {Button, ActionCard, Card, Spinner, ProgressComposite, Info};
+export {Button, ActionCard, Card, Spinner, DialogCover, ProgressComposite, Info};

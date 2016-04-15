@@ -1,4 +1,4 @@
-import {Card, ActionCard, ProgressComposite} from './UI';
+import {Card, ActionCard, ProgressComposite, DialogCover} from './UI';
 import move from 'move-js';
 const deck = (element, board, action) => {
     const ORIGINAL_WIDTH = 1100;
@@ -97,7 +97,7 @@ const deck = (element, board, action) => {
             } else {
                 draw();
             }
-        } else if (state.game === 'loosed') {
+        } else if (state.game === 'loose') {
             element.appendChild(DialogCover());
         }
     };
