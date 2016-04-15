@@ -98,7 +98,13 @@ const deck = (element, board, action) => {
                 draw();
             }
         } else if (state.game === 'loose') {
-            element.appendChild(DialogCover());
+            state.game = 'dialog';
+            element.appendChild(DialogCover(board.width / ORIGINAL_WIDTH, {
+                dialogText: 'test',
+                dialogButtonText: 'Play Again',
+                dialogTop: Math.ceil(board.width / proportion / 2),
+                dialogLeft: Math.ceil(board.width / 2)
+            }));
         }
     };
     return {render};

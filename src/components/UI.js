@@ -18,7 +18,21 @@ const cardStyle = (props)=> {
     };
 };
 const Card = (props)=> h('div', cardStyle(props));
-const DialogCover = (props)=>h('div.dialogCover', []);
+const DialogCover = (scale, props)=>h('div.dialogCover',
+    [
+        h('div.dialogBody', [
+            h('div.dialogText', props.dialogText, {style: `font-size${scale*32}px`}),
+            h('div.dialogExtraText', props.dialogExtraText, {style: `font-size${scale*32}px`}),
+            h('div.dialogButton', props.dialogButtonText, {style: `font-size${scale*32}px`})
+        ], {
+            style: {
+                top: `${props.dialogTop}px`,
+                left:`${props.dialogLeft}px`,
+                padding: `${scale*40}px`,
+            }
+        })
+    ]
+);
 const Score = (scale, props)=> h('div',
     [h('div.scoreTitle', 'SCORE', {
         style: {

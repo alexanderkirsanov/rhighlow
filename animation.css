@@ -15,6 +15,7 @@ html, body {
     src: url('resources/font/RubrikSemiBold.otf') format('opentype');
     font-weight: bold;
 }
+
 @font-face {
     font-family: 'RubrikExtraLight';
     src: url('resources/font/RubrikExtraLight.otf') format('opentype');
@@ -196,13 +197,31 @@ span.cardStats {
     height: 100%;
 }
 
-.dialogCover{
-    opacity: 0.5;
-    background-color: black;
+.dialogCover {
+    background-color: rgba(0, 0, 0, .5);
     position: absolute;
     height: 100%;
     width: 100%;
     top: 0;
     left: 0;
     z-index: 100;
+}
+
+.dialogBody {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    border-radius: 20px;
+    border: solid #927c48;
+    background-color: #0c1c09;
+    box-shadow: 0 0 30px rgba(146,124,72,1);
+}
+
+.dialogButton {
+    display: inline-block;
+    background-color: #91743f;
+    color:#fff;
+    font-family: RubrikRegular;
+    padding: 20px;
+    border-radius: 5px;
 }
