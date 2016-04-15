@@ -14,7 +14,7 @@ const deck = (element, board, action) => {
 
     const firstCard = () => {
         const ORIGINAL_FIRST_WIDTH = 260;
-        const ORIGINAL_LEFT = 1076 - ORIGINAL_FIRST_WIDTH;
+        const ORIGINAL_LEFT = 1090 - ORIGINAL_FIRST_WIDTH;
         const ORIGINAL_FIRST_HEIGHT = 359;
         const coordinates = getCoordinates(ORIGINAL_LEFT, ORIGINAL_FIRST_WIDTH, ORIGINAL_FIRST_HEIGHT);
         return Card(Object.assign(coordinates, {className: 'firstCard'}));
@@ -22,25 +22,25 @@ const deck = (element, board, action) => {
 
     const secondCard = () => {
         const ORIGINAL_FIRST_WIDTH = 286;
-        const ORIGINAL_LEFT = 1061 - ORIGINAL_FIRST_WIDTH;
+        const ORIGINAL_LEFT = 1079 - ORIGINAL_FIRST_WIDTH;
         const ORIGINAL_FIRST_HEIGHT = 394;
         const coordinates = getCoordinates(ORIGINAL_LEFT, ORIGINAL_FIRST_WIDTH, ORIGINAL_FIRST_HEIGHT);
         return Card(Object.assign(coordinates, {className: 'secondCard'}));
     };
 
     const thirdCard = () => {
-        const ORIGINAL_FIRST_WIDTH = 325;
-        const ORIGINAL_LEFT = 1025 - ORIGINAL_FIRST_WIDTH;
         const ORIGINAL_FIRST_HEIGHT = 450;
+        const ORIGINAL_FIRST_WIDTH = 325;
+        const ORIGINAL_LEFT = 1062 - ORIGINAL_FIRST_WIDTH;
         const coordinates = getCoordinates(ORIGINAL_LEFT, ORIGINAL_FIRST_WIDTH, ORIGINAL_FIRST_HEIGHT);
         return Card(Object.assign(coordinates, {className: 'thirdCard'}));
     };
 
     const centralCard = (state = {suite: null, face: null}, action = {}) => {
         const {suite, face} = state;
-        const ORIGINAL_FIRST_WIDTH = 406;
-        const ORIGINAL_LEFT = 978 - ORIGINAL_FIRST_WIDTH;
-        const ORIGINAL_FIRST_HEIGHT = 560;
+        const ORIGINAL_FIRST_HEIGHT = 530;
+        const ORIGINAL_FIRST_WIDTH = Math.ceil(ORIGINAL_FIRST_HEIGHT / 1.44);
+        const ORIGINAL_LEFT = 1030 - ORIGINAL_FIRST_WIDTH;
         const coordinates = getCoordinates(ORIGINAL_LEFT, ORIGINAL_FIRST_WIDTH, ORIGINAL_FIRST_HEIGHT);
         return ActionCard(Object.assign(coordinates, {className: 'centralCard', suite, face}, action));
     };
@@ -48,9 +48,9 @@ const deck = (element, board, action) => {
 
     const bigCard = (state = {suite: null, face: null}) => {
         const {suite, face} = state;
-        const ORIGINAL_FIRST_WIDTH = 460;
-        const ORIGINAL_LEFT = 640 - ORIGINAL_FIRST_WIDTH;
-        const ORIGINAL_FIRST_HEIGHT = 633;
+        const ORIGINAL_FIRST_HEIGHT = 620;
+        const ORIGINAL_FIRST_WIDTH = Math.ceil(ORIGINAL_FIRST_HEIGHT / 1.44);
+        const ORIGINAL_LEFT = 710 - ORIGINAL_FIRST_WIDTH;
         const coordinates = getCoordinates(ORIGINAL_LEFT, ORIGINAL_FIRST_WIDTH, ORIGINAL_FIRST_HEIGHT);
         return Card(Object.assign(coordinates, {className: 'bigCard', suite, face}));
     };
@@ -91,7 +91,7 @@ const deck = (element, board, action) => {
             } else {
                 draw();
             }
-        } else if (state.game === 'loosed'){
+        } else if (state.game === 'loosed') {
 
         }
     };

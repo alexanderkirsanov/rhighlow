@@ -88,16 +88,16 @@
 
 
 .color-black.notopened{
-    color: #181818;
+    color: #141618;
 }
 .color-black.opened{
-    color: #6b6e73;
+    color: #666c77;
 }
 .color-red.notopened{
-    color: #2b1410;
+    color: #33120b;
 }
 .color-red.opened{
-    color: #f66344;
+    color: #ff5b38;
 }
 
 .logo {
