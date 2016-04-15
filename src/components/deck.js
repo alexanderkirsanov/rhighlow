@@ -1,9 +1,15 @@
 import {Card, ActionCard, ProgressComposite} from './UI';
 import move from 'move-js';
 const deck = (element, board, action) => {
+    const ORIGINAL_WIDTH = 1100;
+    const ORIGINAL_HEIGHT = 700;
+    const proportion = ORIGINAL_WIDTH / ORIGINAL_HEIGHT;
+
+    if (board.width / proportion > board.height) {
+        board.width = board.height * proportion;
+    }
     const getCoordinates = (originalLeft, originalWidth, originalHeight) => {
-        const ORIGINAL_WIDTH = 1100;
-        const ORIGINAL_HEIGHT = 700;
+
         const left = Math.ceil(board.width * originalLeft / ORIGINAL_WIDTH);
         const width = Math.ceil(board.width * originalWidth / ORIGINAL_WIDTH);
         const height = Math.ceil(width * originalHeight / originalWidth);
@@ -92,7 +98,7 @@ const deck = (element, board, action) => {
                 draw();
             }
         } else if (state.game === 'loosed') {
-
+            element.appendChild(DialogCover());
         }
     };
     return {render};

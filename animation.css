@@ -1,6 +1,18 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 @font-face {
     font-family: 'RubrikBold';
     src: url('resources/font/RubrikBold.otf') format('opentype');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'RubrikSemiBold';
+    src: url('resources/font/RubrikSemiBold.otf') format('opentype');
     font-weight: bold;
 }
 @font-face {
@@ -8,12 +20,14 @@
     src: url('resources/font/RubrikExtraLight.otf') format('opentype');
     font-weight: bold;
 }
+
 @font-face {
     font-family: 'RubrikRegular';
     src: url('resources/font/RubrikRegular.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
 }
+
 @font-face {
     font-family: 'RubrikMedium';
     src: url('resources/font/RubrikMedium.otf') format('opentype');
@@ -85,18 +99,19 @@
     flex: 1
 }
 
-
-
-.color-black.notopened{
+.color-black.notopened {
     color: #141618;
 }
-.color-black.opened{
+
+.color-black.opened {
     color: #666c77;
 }
-.color-red.notopened{
+
+.color-red.notopened {
     color: #33120b;
 }
-.color-red.opened{
+
+.color-red.opened {
     color: #ff5b38;
 }
 
@@ -119,36 +134,49 @@
 
 .progressInfo {
     display: flex;
-    padding: 25px 25px 10px 25px;
 }
 
 .progressComposite {
     z-index: 50;
     background-color: #020202;
 }
-.firstLine{
-    padding: 0 25px;
+
+.firstLine {
+    padding: 1px 25px;
 }
-span.cardTitle{
+
+span.cardTitle {
     display: inline;
     color: #5d5d5d;
     font-family: RubrikSemiBold;
 }
 
-span.cardStats{
+span.cardStats {
     display: inline;
     float: right;
     color: #f4f4f4;
-    font-family: RubrikSemiBold;
+    font-family: RubrikRegular;
 }
 
 .cardProgress {
     padding: 0 25px;
 }
-.progressBack{
-    height: 5px;
-    background-color: #00d6b2;
 
+.progressBack {
+    height: 5px;
+    background: url('resources/images/gradient-color.png') no-repeat;
+    background-size: cover;
+}
+
+.score {
+    font-family: RubrikExtraLight;
+    text-align: center;
+    color: #ffffff;
+}
+
+.scoreTitle {
+    color: #0b5601;
+    text-align: center;
 }
 
 .cell {
@@ -158,8 +186,12 @@ span.cardStats{
     font-family: RubrikSemiBold;
 }
 
-.progressFront{
+.progressFront {
     height: 5px;
     float: right;
     background-color: #000;
+}
+
+#game {
+    height: 100%;
 }

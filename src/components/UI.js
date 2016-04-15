@@ -18,8 +18,21 @@ const cardStyle = (props)=> {
     };
 };
 const Card = (props)=> h('div', cardStyle(props));
-
-const Score = (props)=> h('div', [h('div.scoreTitle', 'Score'), h('div.score', props.score)]);
+const DialogCover = (props)=>h('div.dialogCover', []);
+const Score = (scale, props)=> h('div',
+    [h('div.scoreTitle', 'SCORE', {
+        style: {
+            'font-size': `${Math.ceil(16 * scale)}px`,
+            'padding-top': `${Math.ceil(20 * scale)}px`
+        }
+    }),
+        h('div.score', props.score, {
+            style: {
+                'font-size': `${Math.ceil(60 * scale)}px`
+            }
+        })
+    ]
+);
 
 const Button = (props)=> h(`div.button.${props.className}`, h('div', props.label), {
     onclick: props.onClick,
@@ -131,7 +144,18 @@ const Status = (scale, props) => {
 };
 const Info = (scale, props) => {
     const height = Math.ceil(192 * scale);
-    return h('div.info', [h('div.logo', {style: {height: `${height}px`}}), Status(scale, props)]);
+    return h('div.info',
+        [
+            h('div.logo',
+                {
+                    style: {
+                        height: `${height}px`
+                    }
+                }
+            ),
+            Status(scale, props)
+        ]
+    );
 };
 const ProgressInfo = (scale, items, groupIcon) => {
 
@@ -161,7 +185,11 @@ const ProgressInfo = (scale, items, groupIcon) => {
                 }
             }),
             h('div.items', [...firstPart, ...secondPart])
-        ]
+        ], {
+            style: {
+                padding: `${Math.ceil(scale * 25)}px ${Math.ceil(scale * 25)}px ${Math.ceil(scale * 10)}px ${Math.ceil(scale * 25)}px`
+            }
+        }
     );
 };
 const ProgressComposite = (state)=> {
@@ -171,7 +199,7 @@ const ProgressComposite = (state)=> {
     state.cards.forEach((cardSet, index)=> {
         items.push(ProgressInfo(scale, cardSet, index))
     });
-    items.push(Score(state));
+    items.push(Score(scale, state));
     return h('div.progressComposite', items, {
         style: {
             position: 'absolute',
