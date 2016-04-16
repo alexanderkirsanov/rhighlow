@@ -5,8 +5,8 @@ import config from './config';
 const Game = (element, size = 52)=> {
     let nextCard = 0;
     let state = {};
-    const cardDeck = CardDeck();
-    const hand = Hand(size);
+    let cardDeck;
+    let hand;
     const openCard = (suite, face) => {
         const index = config.getIndexByName(suite);
         face = face !== "10"? face[0] : face;
@@ -37,11 +37,13 @@ const Game = (element, size = 52)=> {
             }
         }
         const secretCard = hand.getCard(nextCard);
-        images[1] = Object.assign(images[1], secretCard);
+        if (secretCard){
+            images[1] = Object.assign(images[1], secretCard);
+        }
         Object.assign(state, {cardImages: images});
         currentDeck.render(state);
-        if (nextCard % 5 === 0) {
-            // Object.assign(state, {game: 'win'});
+        if (nextCard === 52) {
+            Object.assign(state, {game: 'win'});
         }
         currentDeck.render(state);
     };
@@ -64,6 +66,8 @@ const Game = (element, size = 52)=> {
     }).reverse());
 
     const setup = () => {
+        cardDeck = CardDeck();
+        hand  = Hand(size);
         for (let i = 0; i < hand.size; i++) {
             hand.addCard(cardDeck.deal());
         }
@@ -75,7 +79,7 @@ const Game = (element, size = 52)=> {
         });
         images[0] = Object.assign(images[0], {suite, face});
         images[1] = Object.assign(images[1], secretCard);
-        state = {cardImages: images, game: 'started', cards: initCards(), score: 0};
+        state = {cardImages: images, game: 'started', cards: initCards(), score: 0, playAgain: setup};
         openCard(suite, face);
         currentDeck.render(state);
     };

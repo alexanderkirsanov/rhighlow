@@ -97,10 +97,25 @@ const deck = (element, board, action) => {
             } else {
                 draw();
             }
-        } else if (state.game === 'loose') {
-            state.game = 'dialog';
+        } else if (state.game === 'loose' || state.game === 'win') {
+            const flatten = list => list.reduce(
+                (a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), []
+            );
+            const cards = flatten(state.cards);
+            const opened = cards.filter(x=>x.opened);
+            const count =  state.game === 'loose'? opened.length - 1: opened.length;
+
             element.appendChild(DialogCover(board.width / ORIGINAL_WIDTH, {
-                dialogText: 'test',
+                dialogText: [
+                    'Congratulations you got',
+                    `${count} correct in a row`,
+                    'Make better decisions with'
+                ],
+                dialogExtraText: [
+                    'Reliable data &',
+                    'Recommended Actions'
+                ],
+                dialogOnClick: state.playAgain,
                 dialogButtonText: 'Play Again',
                 dialogTop: Math.ceil(board.width / proportion / 2),
                 dialogLeft: Math.ceil(board.width / 2)

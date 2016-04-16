@@ -224,4 +224,15 @@ span.cardStats {
     font-family: RubrikRegular;
     padding: 20px;
     border-radius: 5px;
+    margin-top:20px;
+}
+.dialogText >p {
+    margin: 0;
+    color: #ffec81;
+    font-family: RubrikLight;
+}
+.dialogExtraText >p {
+    margin: 0;
+    color: #ffec81;
+    font-family: RubrikRegular;
 }

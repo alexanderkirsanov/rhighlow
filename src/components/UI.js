@@ -21,14 +21,18 @@ const Card = (props)=> h('div', cardStyle(props));
 const DialogCover = (scale, props)=>h('div.dialogCover',
     [
         h('div.dialogBody', [
-            h('div.dialogText', props.dialogText, {style: `font-size${scale*32}px`}),
-            h('div.dialogExtraText', props.dialogExtraText, {style: `font-size${scale*32}px`}),
-            h('div.dialogButton', props.dialogButtonText, {style: `font-size${scale*32}px`})
+            h('div.dialogText', props.dialogText.map((text, index)=> h('p', text)),
+                {style: `font-size:${Math.ceil(scale * 32)}px`}),
+            h('div.dialogExtraText', props.dialogExtraText.map((text, index)=> h('p', text)), {style: `font-size: ${Math.ceil(scale * 32)}px`}),
+            h('div.dialogButton', props.dialogButtonText, {
+                onclick: props.dialogOnClick,
+                style: `font-size:${Math.ceil(scale * 32)}px`
+            })
         ], {
             style: {
                 top: `${props.dialogTop}px`,
-                left:`${props.dialogLeft}px`,
-                padding: `${scale*40}px`,
+                left: `${props.dialogLeft}px`,
+                padding: `${scale * 40}px`
             }
         })
     ]
@@ -127,7 +131,6 @@ const ActionCard = (props) => {
     });
 };
 const Progress = (cardLength, openedLength) => {
-    //max: cards.length, value: opened.length
     return h('div.cardProgress', [
         h('div.progressBack', [
             h('div.progressFront', {
