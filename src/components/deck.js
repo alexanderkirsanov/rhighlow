@@ -106,7 +106,7 @@ const deck = (element, board, action) => {
             const cards = flatten(state.cards);
             const opened = cards.filter(x=>x.opened);
             const count =  state.game === 'loose'? opened.length - 1: opened.length;
-            element.appendChild(DialogCover(board.width / ORIGINAL_WIDTH, {
+            element.firstChild.appendChild(DialogCover(board.width / ORIGINAL_WIDTH, {
                 dialogText: [
                     'Congratulations you got',
                     `${count} correct in a row`,
