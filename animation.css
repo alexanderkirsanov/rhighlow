@@ -159,10 +159,13 @@ html, body {
     transform: translate(-50%, -50%);
 }
 
-#game {
+.loaded {
     background-color: #014200;
 }
-
+.loading{
+    background: url('resources/images/splash-screen.jpg') no-repeat;
+    background-size: cover;
+}
 .progressInfo {
     display: flex;
 }

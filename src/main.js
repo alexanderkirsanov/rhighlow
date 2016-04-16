@@ -10,12 +10,12 @@ const GameLoader = (element) => {
         suite,
         face
     }))), [config.defaultImage]);
-    const spinner = Spinner();
-    element.appendChild(spinner);
+    element.className='loading';
     ImageLoader.loadImages(images).then(()=> {
         while (element.firstChild) {
             element.removeChild(element.firstChild);
         }
+        element.className='loaded';
         Game(element).setup();
     });
 };
