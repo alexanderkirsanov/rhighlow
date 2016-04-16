@@ -52,16 +52,21 @@ const Score = (scale, props)=> h('div',
     ]
 );
 
-const Button = (props)=> h(`div.button.${props.className}`, h('div', props.label), {
-    onclick: props.onClick,
-    style: {
-        position: 'absolute',
-        width: `${Math.ceil(props.width)}px`,
-        height: `${Math.ceil(props.height)}px`,
-        top: `${Math.ceil(props.top)}px`,
-        left: `${Math.ceil(props.left)}px`
-    }
-});
+const Button = (props)=> h(`div.button.${props.className}`, h('div', props.label, {
+        style: {
+            'font-size': props.fontSize
+        }
+    }),
+    {
+        onclick: props.onClick,
+        style: {
+            position: 'absolute',
+            width: `${Math.ceil(props.width)}px`,
+            height: `${Math.ceil(props.height)}px`,
+            top: `${Math.ceil(props.top)}px`,
+            left: `${Math.ceil(props.left)}px`
+        }
+    });
 
 const ActionCard = (props) => {
     const originalWidth = 406;
@@ -83,19 +88,23 @@ const ActionCard = (props) => {
         onClick: props.highClick,
         className: 'high',
         label: 'HIGH',
+        fontSize: `${scaleH * 33}px`,
         top: highTop * scaleH
     }));
     const low = Button(Object.assign(buttonCoords, {
         onClick: props.lowClick,
         className: 'low',
         label: 'LOW',
+        fontSize: `${scaleH * 33}px`,
         top: lowTop * scaleH
     }));
 
     const recommend = Button(Object.assign(buttonCoords, {
         onClick: props.recommendClick,
         className: 'recommend',
-        label: 'recommended action',
+        label: 'Recommended action',
+        fontSize: `${scaleH * 15}px`,
+        background: 'url(\'resources/images/recommended-action.jpg\') no-repeat;',
         top: recommendedTop * scaleH
     }));
 
@@ -232,5 +241,12 @@ const Spinner = ()=> {
     const items = [1, 2, 3, 4, 5].map(i=> h(`div.rect${i}`));
     return h('div.spinner', items);
 };
-
-export {Button, ActionCard, Card, Spinner, DialogCover, ProgressComposite, Info};
+const Main = (height, width, items) => {
+    return h('div.main', items, {
+        style: {
+            height: `${Math.ceil(height) + 5}px`,
+            width: `${Math.ceil(width)}px`
+        }
+    })
+};
+export {Main, Button, ActionCard, Card, Spinner, DialogCover, ProgressComposite, Info};

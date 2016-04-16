@@ -1,4 +1,4 @@
-import {Card, ActionCard, ProgressComposite, DialogCover} from './UI';
+import {Card, ActionCard, ProgressComposite, Main, DialogCover} from './UI';
 import move from 'move-js';
 const deck = (element, board, action) => {
     const ORIGINAL_WIDTH = 1100;
@@ -71,22 +71,24 @@ const deck = (element, board, action) => {
     const render = (state) => {
         const {cardImages} = state;
         const draw = () => {
+            const items = [];
             while (element.firstChild) {
                 element.removeChild(element.firstChild);
             }
-            element.appendChild(progressInfo(state));
+            items.push(progressInfo(state));
 
             const cards = [firstCard(),
                 secondCard(),
                 thirdCard(),
                 centralCard(cardImages[1], action),
                 bigCard(cardImages[0])];
-            cards.forEach(card => element.appendChild(card));
+            items.push.apply(items, cards);
+            const coordinates = getCoordinates(0, ORIGINAL_WIDTH, ORIGINAL_HEIGHT);
+            element.appendChild(Main(coordinates.height, coordinates.width, items));
             const card = $(".card");
             card.flip({autoSize: false, trigger: 'manual'});
             card.flip(true);
         };
-        console.log(state);
         console.log(state.cardImages[1]);
         if (state.game === 'started') {
             if (state.cardImages.length < 52) {
@@ -104,7 +106,6 @@ const deck = (element, board, action) => {
             const cards = flatten(state.cards);
             const opened = cards.filter(x=>x.opened);
             const count =  state.game === 'loose'? opened.length - 1: opened.length;
-
             element.appendChild(DialogCover(board.width / ORIGINAL_WIDTH, {
                 dialogText: [
                     'Congratulations you got',

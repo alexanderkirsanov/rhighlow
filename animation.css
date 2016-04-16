@@ -125,12 +125,42 @@ html, body {
     cursor: pointer;
 }
 
+.button > div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .high {
     background-color: #e85d45;
+    font-family: RubrikRegular;
+    color: white;
 }
 
 .low {
     background-color: #a1ce3c;
+    font-family: RubrikRegular;
+    color: white;
+}
+
+.recommend {
+    font-family: RubrikSemiBold;
+    color: #ede048;
+    /*background: url('resources/images/recommended-action.jpg') no-repeat;*/
+}
+
+.main {
+    background: url('resources/images/page-bg.jpg') no-repeat;
+    position: absolute;
+    background-size: cover;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#game {
+    background-color: #014200;
 }
 
 .progressInfo {
@@ -197,6 +227,10 @@ span.cardStats {
     height: 100%;
 }
 
+.main {
+    overflow: auto;
+}
+
 .dialogCover {
     background-color: rgba(0, 0, 0, .5);
     position: absolute;
@@ -214,24 +248,27 @@ span.cardStats {
     border-radius: 20px;
     border: solid #927c48;
     background-color: #0c1c09;
-    box-shadow: 0 0 30px rgba(146,124,72,1);
+    box-shadow: 0 0 30px rgba(146, 124, 72, 1);
 }
 
 .dialogButton {
     display: inline-block;
     background-color: #91743f;
-    color:#fff;
+    color: #fff;
+    cursor: pointer;
     font-family: RubrikRegular;
     padding: 20px;
     border-radius: 5px;
-    margin-top:20px;
+    margin-top: 20px;
 }
-.dialogText >p {
+
+.dialogText > p {
     margin: 0;
     color: #ffec81;
     font-family: RubrikLight;
 }
-.dialogExtraText >p {
+
+.dialogExtraText > p {
     margin: 0;
     color: #ffec81;
     font-family: RubrikRegular;
