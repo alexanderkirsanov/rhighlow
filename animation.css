@@ -107,7 +107,7 @@ html, body {
 .recommend {
     font-family: RubrikSemiBold;
     color: #ede048;
-    /*background: url('resources/images/recommended-action.jpg') no-repeat;*/
+    background: url('resources/images/recommended-action.png') no-repeat;
 }
 
 .main {

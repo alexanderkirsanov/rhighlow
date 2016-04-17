@@ -102,9 +102,8 @@ const ActionCard = (props) => {
     const recommend = Button(Object.assign(buttonCoords, {
         onClick: props.recommendClick,
         className: 'recommend',
-        label: 'Recommended action',
+        label: '',
         fontSize: `${scaleH * 15}px`,
-        background: 'url(\'resources/images/recommended-action.jpg\') no-repeat;',
         top: recommendedTop * scaleH
     }));
 
