@@ -56,12 +56,24 @@ html, body {
     color: #666c77;
 }
 
+.color-black.opened.selected{
+    background-color: #666c77;
+    border-radius: 50%;
+    color: #CCCBCB;
+}
+
 .color-red.notopened {
     color: #33120b;
 }
 
 .color-red.opened {
     color: #ff5b38;
+}
+
+.color-red.opened.selected{
+    background-color: #FF775A;
+    border-radius: 50%;
+    color: #CCCBCB;
 }
 
 .logo {
@@ -106,7 +118,7 @@ html, body {
 }
 
 .loaded {
-    background: url('resources/images/page-bg.jpg') no-repeat;
+    background: url('resources/images/page-bg.png') no-repeat;
     background-size: cover;
 
 }

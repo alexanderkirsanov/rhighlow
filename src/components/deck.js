@@ -50,7 +50,8 @@ const deck = (element, board, action) => {
     const centralCard = (props, state = {suite: null, face: null}, action = {}) => {
         Object.assign(action, {
             recommendClick: ()=> {
-                if ($('.button.recommend').hasClass('disabled')) {
+                const recommended = $('.button.recommend');
+                if (recommended.hasClass('disabled')) {
                     return;
                 }
                 const cards = flatten(props.cards);
@@ -64,9 +65,7 @@ const deck = (element, board, action) => {
                 }
                 $('.button.high').css('background', `linear-gradient(90deg, #C43324 ${moreThan}%, #E95C45 0%)`);
                 $('.button.low').css('background', `linear-gradient(90deg, #7FA52C ${100 - moreThan}%, #A2CF3D 0%)`);
-                $('.button.recommend').addClass('disabled');
-                debugger;
-                // const
+                recommended.addClass('disabled');
             }
         });
         const {suite, face} = state;
@@ -129,22 +128,27 @@ const deck = (element, board, action) => {
 
             const cards = flatten(state.cards);
             const opened = cards.filter(x=>x.opened);
-            const count = state.game === 'loose' ? opened.length - 1 : opened.length;
-            element.firstChild.appendChild(DialogCover(board.width / ORIGINAL_WIDTH, {
-                dialogText: [
-                    'Congratulations you got',
-                    `${count} correct in a row`,
-                    'Make better decisions with'
-                ],
-                dialogExtraText: [
-                    'Reliable data &',
-                    'Recommended Actions'
-                ],
-                dialogOnClick: state.playAgain,
-                dialogButtonText: 'Play Again',
-                dialogTop: Math.ceil(board.width / proportion / 2),
-                dialogLeft: Math.ceil(board.width / 2)
-            }));
+            const count = state.game === 'loose' ? opened.length - 2 : opened.length;
+            $(".card").flip(false);
+            setTimeout(()=> {
+                element.firstChild.appendChild(DialogCover(board.width / ORIGINAL_WIDTH, {
+                    dialogText: [
+                        count === 0
+                            ? 'You got'
+                            : 'Congratulations you got',
+                        `${count} correct in a row`,
+                        'Make better decisions with'
+                    ],
+                    dialogExtraText: [
+                        'Reliable data &',
+                        'Recommended Actions'
+                    ],
+                    dialogOnClick: state.playAgain,
+                    dialogButtonText: 'Play Again',
+                    dialogTop: Math.ceil(board.width / proportion / 2),
+                    dialogLeft: Math.ceil(board.width / 2)
+                }));
+            }, 600);
         }
     };
     return {render};

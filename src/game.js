@@ -2,6 +2,11 @@ import CardDeck from './cardDeck';
 import Hand from './hand';
 import deck from './components/deck';
 import config from './config';
+
+const flatten = list => list.reduce(
+    (a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), []
+);
+
 const Game = (element, size = 52)=> {
     let nextCard = 0;
     let state = {};
@@ -9,8 +14,19 @@ const Game = (element, size = 52)=> {
     let hand;
     const openCard = (suite, face) => {
         const index = config.getIndexByName(suite);
-        face = face !== "10"? face[0] : face;
-        state.cards[index].filter(card=>card.face === face).forEach(card=>card.opened = true);
+        face = face !== "10" ? face[0] : face;
+        const flattened = flatten(state.cards);
+        flattened.filter(card => card.preLast).forEach(card => {
+            delete card.preLast;
+        });
+        flattened.filter(card => card.last).forEach(card => {
+            delete card.last;
+            card.preLast = true;
+        });
+        state.cards[index].filter(card=>card.face === face).forEach(card=> {
+            card.opened = true;
+            card.last = true;
+        });
     };
     const processAction = (action)=> {
         const {suite, face, rank} = hand.getCard(nextCard);
@@ -37,7 +53,7 @@ const Game = (element, size = 52)=> {
             }
         }
         const secretCard = hand.getCard(nextCard);
-        if (secretCard){
+        if (secretCard) {
             images[1] = Object.assign(images[1], secretCard);
         }
         Object.assign(state, {cardImages: images});
@@ -66,7 +82,7 @@ const Game = (element, size = 52)=> {
 
     const setup = () => {
         cardDeck = CardDeck();
-        hand  = Hand(size);
+        hand = Hand(size);
         for (let i = 0; i < hand.size; i++) {
             hand.addCard(cardDeck.deal());
         }

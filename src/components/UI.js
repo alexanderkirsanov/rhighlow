@@ -186,7 +186,16 @@ const Info = (scale, props) => {
 const ProgressInfo = (scale, items, groupIcon) => {
 
     const color = groupIcon === 0 || groupIcon === 3 ? 'black' : 'red';
-    const createItem = (item) => h(`div.color-${color}.cell.${item.opened ? 'opened' : 'notopened'}`, item.face, {
+    const createStyle = (prop)=>{
+        const result = [];
+        result.push(prop.opened ?  'opened' : 'notopened');
+        if (prop.preLast){
+            result.push('selected');
+            debugger;
+        }
+        return result.join('.')
+    };
+    const createItem = (item) => h(`div.color-${color}.cell.${createStyle(item)}`, item.face, {
         style: {
             height: `${Math.ceil(25 * scale)}px`,
             'font-size': `${Math.ceil(20 * scale)}px`
