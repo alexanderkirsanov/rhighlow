@@ -98,10 +98,13 @@ const ActionCard = (props) => {
         fontSize: `${scaleH * 33}px`,
         top: lowTop * scaleH
     }));
-
+    const classNames = ['recommend'];
+    if (props.score < 300){
+        classNames.push('disabled');
+    }
     const recommend = Button(Object.assign(buttonCoords, {
         onClick: props.recommendClick,
-        className: 'recommend',
+        className: classNames.join('.'),
         label: '',
         fontSize: `${scaleH * 15}px`,
         top: recommendedTop * scaleH

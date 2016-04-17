@@ -65,8 +65,11 @@ const deck = (element, board, action) => {
                 if ((rankNext< currentRank && moreThan > 50) || (rankNext > currentRank && moreThan < 50)) {
                     moreThan = 100 - moreThan;
                 }
+                props.score = props.score - 300;
+                $('.score').text(props.score);
                 $('.button.high').css('background', `linear-gradient(90deg, #C43324 ${moreThan}%, #E95C45 0%)`);
                 $('.button.low').css('background', `linear-gradient(90deg, #7FA52C ${100 - moreThan}%, #A2CF3D 0%)`);
+
                 recommended.addClass('disabled');
             }
         });
@@ -75,7 +78,7 @@ const deck = (element, board, action) => {
         const ORIGINAL_FIRST_WIDTH = Math.ceil(ORIGINAL_FIRST_HEIGHT / 1.44);
         const ORIGINAL_LEFT = 1030 - ORIGINAL_FIRST_WIDTH;
         const coordinates = getCoordinates(ORIGINAL_LEFT, ORIGINAL_FIRST_WIDTH, ORIGINAL_FIRST_HEIGHT);
-        return ActionCard(Object.assign(coordinates, {className: 'centralCard', suite, face}, action));
+        return ActionCard(Object.assign(coordinates, {className: 'centralCard', suite, face, score: props.score}, action));
     };
 
 
