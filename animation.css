@@ -96,12 +96,16 @@ html, body {
     background-color: #e85d45;
     font-family: RubrikRegular;
     color: white;
+    border-radius: 2px;
+    box-shadow: 0 2px 0 rgba(232, 93, 69, 0.65);
 }
 
 .low {
     background-color: #a1ce3c;
     font-family: RubrikRegular;
     color: white;
+    border-radius: 2px;
+    box-shadow: 0 2px 0 rgba(161, 206, 60, 0.65);
 }
 
 .recommend {
@@ -248,7 +252,7 @@ span.cardStats {
     -moz-filter: blur(2px);
     -o-filter: blur(2px);
     -ms-filter: blur(2px);
-    filter: blur(2spx);
+    filter: blur(2 spx);
 }
 
 .disabled {
