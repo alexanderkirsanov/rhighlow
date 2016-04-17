@@ -10,12 +10,12 @@ const GameLoader = (element) => {
         suite,
         face
     }))), [config.defaultImage]);
-    element.className='loading';
+    element.className = 'loading';
     ImageLoader.loadImages(images).then(()=> {
         while (element.firstChild) {
             element.removeChild(element.firstChild);
         }
-        element.className='loaded';
+        element.className = 'loaded';
         Game(element).setup();
     });
 };

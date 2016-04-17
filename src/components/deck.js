@@ -62,7 +62,7 @@ const deck = (element, board, action) => {
                 let moreThan = Math.ceil((biggerThanCurrent.length / cards.length) * 100);
                 const rankNext = config.getRankByName(props.cardImages[1].face);
                 const currentRank = config.getRankByName(props.cardImages[0].face);
-                if ((rankNext< currentRank && moreThan > 50) || (rankNext > currentRank && moreThan < 50)) {
+                if ((rankNext < currentRank && moreThan > 50) || (rankNext > currentRank && moreThan < 50)) {
                     moreThan = 100 - moreThan;
                 }
                 props.score = props.score - 300;
@@ -78,7 +78,12 @@ const deck = (element, board, action) => {
         const ORIGINAL_FIRST_WIDTH = Math.ceil(ORIGINAL_FIRST_HEIGHT / 1.44);
         const ORIGINAL_LEFT = 1030 - ORIGINAL_FIRST_WIDTH;
         const coordinates = getCoordinates(ORIGINAL_LEFT, ORIGINAL_FIRST_WIDTH, ORIGINAL_FIRST_HEIGHT);
-        return ActionCard(Object.assign(coordinates, {className: 'centralCard', suite, face, score: props.score}, action));
+        return ActionCard(Object.assign(coordinates, {
+            className: 'centralCard',
+            suite,
+            face,
+            score: props.score
+        }, action));
     };
 
 
@@ -138,7 +143,7 @@ const deck = (element, board, action) => {
             const card = $('.card');
             card.removeClass('cardBorder');
             card.flip(false);
-            
+
             setTimeout(()=> {
                 element.firstChild.appendChild(DialogCover(board.width / ORIGINAL_WIDTH, {
                     dialogText: [

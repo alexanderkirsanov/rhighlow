@@ -8,6 +8,6 @@ const Card = (face, suit) => {
     }
 
 };
-Card.compareTo = (o1,o2) => o1.rank-o2.rank;
+Card.compareTo = (o1, o2) => o1.rank - o2.rank;
 
 export default Card;

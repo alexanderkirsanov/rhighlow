@@ -17,7 +17,7 @@ const cardStyle = (props)=> {
         }
     };
 };
-const Card = (props)=> h('div', cardStyle(props));
+const Card = (props)=> h(`div.${props.className}`, cardStyle(props));
 const DialogCover = (scale, props)=>h('div.dialogCover',
     [
         h('div.dialogBody', [
@@ -99,7 +99,7 @@ const ActionCard = (props) => {
         top: lowTop * scaleH
     }));
     const classNames = ['recommend'];
-    if (props.score < 300){
+    if (props.score < 300) {
         classNames.push('disabled');
     }
     const recommend = Button(Object.assign(buttonCoords, {
@@ -188,10 +188,10 @@ const Info = (scale, props) => {
 const ProgressInfo = (scale, items, groupIcon) => {
 
     const color = groupIcon === 0 || groupIcon === 3 ? 'black' : 'red';
-    const createStyle = (prop)=>{
+    const createStyle = (prop)=> {
         const result = [];
-        result.push(prop.opened ?  'opened' : 'notopened');
-        if (prop.preLast){
+        result.push(prop.opened ? 'opened' : 'notopened');
+        if (prop.preLast) {
             result.push('selected');
         }
         return result.join('.')

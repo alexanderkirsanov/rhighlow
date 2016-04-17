@@ -56,7 +56,7 @@ html, body {
     color: #666c77;
 }
 
-.color-black.opened.selected{
+.color-black.opened.selected {
     background-color: #666c77;
     border-radius: 50%;
     color: #CCCBCB;
@@ -70,7 +70,7 @@ html, body {
     color: #ff5b38;
 }
 
-.color-red.opened.selected{
+.color-red.opened.selected {
     background-color: #FF775A;
     border-radius: 50%;
     color: #CCCBCB;
@@ -235,12 +235,22 @@ span.cardStats {
     color: #ffec81;
     font-family: RubrikSemiBold;
 }
-.cardBorder{
+
+.cardBorder {
     border-radius: 20px;
     border: solid #a89b24;
     background-color: #0c1c09;
     box-shadow: 0 0 30px rgba(146, 131, 66, 1);
 }
-.disabled{
+
+.firstCard, .secondCard {
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2spx);
+}
+
+.disabled {
     opacity: 0.5;
 }
