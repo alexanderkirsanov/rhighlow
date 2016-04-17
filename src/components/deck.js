@@ -60,7 +60,9 @@ const deck = (element, board, action) => {
 
                 const biggerThanCurrent = notOpened.filter(item => config.getRankByName(item.face, true) >= config.getRankByName(currentFace));
                 let moreThan = Math.ceil((biggerThanCurrent.length / cards.length) * 100);
-                if (config.getRankByName(props.cardImages[1].face) < config.getRankByName(props.cardImages[0].face) && moreThan > 50) {
+                const rankNext = config.getRankByName(props.cardImages[1].face);
+                const currentRank = config.getRankByName(props.cardImages[0].face);
+                if ((rankNext< currentRank && moreThan > 50) || (rankNext > currentRank && moreThan < 50)) {
                     moreThan = 100 - moreThan;
                 }
                 $('.button.high').css('background', `linear-gradient(90deg, #C43324 ${moreThan}%, #E95C45 0%)`);
@@ -114,10 +116,11 @@ const deck = (element, board, action) => {
             card.flip({autoSize: false, trigger: 'manual'});
             card.flip(true);
         };
-        console.log(state.cardImages[1]);
         if (state.game === 'started') {
             if (state.cardImages.length < 52) {
-                $(".card").flip(false);
+                const card = $(".card");
+                card.removeClass('cardBorder');
+                card.flip(false);
                 setTimeout(()=> {
                     draw()
                 }, 600);
@@ -129,7 +132,10 @@ const deck = (element, board, action) => {
             const cards = flatten(state.cards);
             const opened = cards.filter(x=>x.opened);
             const count = state.game === 'loose' ? opened.length - 2 : opened.length;
-            $(".card").flip(false);
+            const card = $('.card');
+            card.removeClass('cardBorder');
+            card.flip(false);
+            
             setTimeout(()=> {
                 element.firstChild.appendChild(DialogCover(board.width / ORIGINAL_WIDTH, {
                     dialogText: [

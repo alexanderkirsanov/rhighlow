@@ -235,6 +235,12 @@ span.cardStats {
     color: #ffec81;
     font-family: RubrikSemiBold;
 }
+.cardBorder{
+    border-radius: 20px;
+    border: solid #a89b24;
+    background-color: #0c1c09;
+    box-shadow: 0 0 30px rgba(146, 131, 66, 1);
+}
 .disabled{
     opacity: 0.5;
 }

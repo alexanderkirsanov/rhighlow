@@ -108,7 +108,7 @@ const ActionCard = (props) => {
         top: recommendedTop * scaleH
     }));
 
-    return h('div.card', [h('div.back', [high, low, recommend], {
+    return h('div.card.cardBorder', [h('div.back', [high, low, recommend], {
         style: {
             position: 'absolute',
             width: `${props.width}px`,
@@ -191,7 +191,6 @@ const ProgressInfo = (scale, items, groupIcon) => {
         result.push(prop.opened ?  'opened' : 'notopened');
         if (prop.preLast){
             result.push('selected');
-            debugger;
         }
         return result.join('.')
     };
