@@ -1,5 +1,10 @@
 import {Card, ActionCard, ProgressComposite, Main, DialogCover} from './UI';
+import config from '../config';
 import move from 'move-js';
+const flatten = list => list.reduce(
+    (a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), []
+);
+
 const deck = (element, board, action) => {
     const ORIGINAL_WIDTH = 1100;
     const ORIGINAL_HEIGHT = 700;
@@ -42,7 +47,28 @@ const deck = (element, board, action) => {
         return Card(Object.assign(coordinates, {className: 'thirdCard'}));
     };
 
-    const centralCard = (state = {suite: null, face: null}, action = {}) => {
+    const centralCard = (props, state = {suite: null, face: null}, action = {}) => {
+        Object.assign(action, {
+            recommendClick: ()=> {
+                if ($('.button.recommend').hasClass('disabled')) {
+                    return;
+                }
+                const cards = flatten(props.cards);
+                const notOpened = cards.filter(x=>!x.opened);
+                const currentFace = props.cardImages[0].face;
+
+                const biggerThanCurrent = notOpened.filter(item => config.getRankByName(item.face, true) >= config.getRankByName(currentFace));
+                let moreThan = Math.ceil((biggerThanCurrent.length / cards.length) * 100);
+                if (config.getRankByName(props.cardImages[1].face) < config.getRankByName(props.cardImages[0].face) && moreThan > 50) {
+                    moreThan = 100 - moreThan;
+                }
+                $('.button.high').css('background', `linear-gradient(90deg, #C43324 ${moreThan}%, #E95C45 0%)`);
+                $('.button.low').css('background', `linear-gradient(90deg, #7FA52C ${100 - moreThan}%, #A2CF3D 0%)`);
+                $('.button.recommend').addClass('disabled');
+                debugger;
+                // const
+            }
+        });
         const {suite, face} = state;
         const ORIGINAL_FIRST_HEIGHT = 530;
         const ORIGINAL_FIRST_WIDTH = Math.ceil(ORIGINAL_FIRST_HEIGHT / 1.44);
@@ -80,7 +106,7 @@ const deck = (element, board, action) => {
             const cards = [firstCard(),
                 secondCard(),
                 thirdCard(),
-                centralCard(cardImages[1], action),
+                centralCard(state, cardImages[1], action),
                 bigCard(cardImages[0])];
             items.push.apply(items, cards);
             const coordinates = getCoordinates(0, ORIGINAL_WIDTH, ORIGINAL_HEIGHT);
@@ -100,12 +126,10 @@ const deck = (element, board, action) => {
                 draw();
             }
         } else if (state.game === 'loose' || state.game === 'win') {
-            const flatten = list => list.reduce(
-                (a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), []
-            );
+
             const cards = flatten(state.cards);
             const opened = cards.filter(x=>x.opened);
-            const count =  state.game === 'loose'? opened.length - 1: opened.length;
+            const count = state.game === 'loose' ? opened.length - 1 : opened.length;
             element.firstChild.appendChild(DialogCover(board.width / ORIGINAL_WIDTH, {
                 dialogText: [
                     'Congratulations you got',

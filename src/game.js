@@ -48,7 +48,6 @@ const Game = (element, size = 52)=> {
         currentDeck.render(state);
     };
     const action = {
-        recommendClick: ()=>alert('recommend'),
         highClick: ()=>processAction('higher'),
         lowClick: ()=> processAction('lower')
     };

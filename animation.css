@@ -21,11 +21,13 @@ html, body {
     src: url('resources/font/RubrikExtraLight.otf') format('opentype');
     font-weight: bold;
 }
+
 @font-face {
     font-family: 'RubrikLight';
     src: url('resources/font/RubrikLight.otf') format('opentype');
     font-weight: normal;
 }
+
 @font-face {
     font-family: 'RubrikRegular';
     src: url('resources/font/RubrikRegular.otf') format('opentype');
@@ -108,10 +110,12 @@ html, body {
     background-size: cover;
 
 }
-.loading{
+
+.loading {
     background: url('resources/images/splash-screen.jpg') no-repeat;
     background-size: cover;
 }
+
 .progressInfo {
     display: flex;
 }
@@ -177,10 +181,6 @@ span.cardStats {
     height: 100%;
 }
 
-.main {
-    overflow: auto;
-}
-
 .dialogCover {
     background-color: rgba(0, 0, 0, .5);
     position: absolute;
@@ -222,4 +222,7 @@ span.cardStats {
     margin: 0;
     color: #ffec81;
     font-family: RubrikSemiBold;
+}
+.disabled{
+    opacity: 0.5;
 }
