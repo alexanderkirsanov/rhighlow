@@ -35,13 +35,6 @@ html, body {
     font-style: normal;
 }
 
-@font-face {
-    font-family: 'RubrikMedium';
-    src: url('resources/font/RubrikMedium.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
-
 .items {
     display: flex;
     flex-flow: row wrap;
@@ -59,7 +52,7 @@ html, body {
 .color-black.opened.selected {
     background-color: #666c77;
     border-radius: 50%;
-    color: #CCCBCB;
+    color: #ffffff;
 }
 
 .color-red.notopened {
@@ -73,7 +66,7 @@ html, body {
 .color-red.opened.selected {
     background-color: #FF775A;
     border-radius: 50%;
-    color: #CCCBCB;
+    color: #ffffff;
 }
 
 .logo {
@@ -111,7 +104,9 @@ html, body {
 .recommend {
     font-family: RubrikSemiBold;
     color: #ede048;
-    background: url('resources/images/recommended-action.png') no-repeat;
+    background-size: contain;
+    background: #1C1C1A url('resources/images/recommended-action.png') no-repeat;
+    border-radius: 2px;
 }
 
 .main {
@@ -128,8 +123,8 @@ html, body {
 }
 
 .loading {
-    background: url('resources/images/splash-screen.jpg') no-repeat;
     background-size: cover;
+    background: url('resources/images/splash-screen.jpg') no-repeat center;
 }
 
 .progressInfo {
@@ -252,6 +247,7 @@ span.cardStats {
     -moz-filter: blur(2px);
     -o-filter: blur(2px);
     -ms-filter: blur(2px);
+    opacity: 0.65;
     filter: blur(2 spx);
 }
 

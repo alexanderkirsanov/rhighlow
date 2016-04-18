@@ -50,27 +50,14 @@ const deck = (element, board, action) => {
     const centralCard = (props, state = {suite: null, face: null}, action = {}) => {
         Object.assign(action, {
             recommendClick: ()=> {
-                const recommended = $('.button.recommend');
-                if (recommended.hasClass('disabled')) {
-                    return;
-                }
                 const cards = flatten(props.cards);
                 const notOpened = cards.filter(x=>!x.opened);
                 const currentFace = props.cardImages[0].face;
 
                 const biggerThanCurrent = notOpened.filter(item => config.getRankByName(item.face, true) >= config.getRankByName(currentFace));
                 let moreThan = Math.ceil((biggerThanCurrent.length / cards.length) * 100);
-                const rankNext = config.getRankByName(props.cardImages[1].face);
-                const currentRank = config.getRankByName(props.cardImages[0].face);
-                if ((rankNext < currentRank && moreThan > 50) || (rankNext > currentRank && moreThan < 50)) {
-                    moreThan = 100 - moreThan;
-                }
-                props.score = props.score - 300;
-                $('.score').text(props.score);
                 $('.button.high').css('background', `linear-gradient(90deg, #C43324 ${moreThan}%, #E95C45 0%)`);
                 $('.button.low').css('background', `linear-gradient(90deg, #7FA52C ${100 - moreThan}%, #A2CF3D 0%)`);
-
-                recommended.addClass('disabled');
             }
         });
         const {suite, face} = state;
