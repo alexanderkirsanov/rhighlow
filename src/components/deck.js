@@ -1,6 +1,5 @@
 import {Card, ActionCard, ProgressComposite, Main, DialogCover} from './UI';
 import config from '../config';
-import move from 'move-js';
 const flatten = list => list.reduce(
     (a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), []
 );

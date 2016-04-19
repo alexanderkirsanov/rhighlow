@@ -1,4 +1,5 @@
 import config from '../config';
+import Info from './statistic/info';
 import h from 'hyperscript'
 
 const cardStyle = (props)=> {
@@ -138,50 +139,7 @@ const ActionCard = (props) => {
         }
     });
 };
-const Progress = (cardLength, openedLength) => {
-    return h('div.cardProgress', [
-        h('div.progressBack', [
-            h('div.progressFront', {
-                style: {
-                    width: `${100 - (openedLength / cardLength) * 100}%`
-                }
-            })
-        ])]
-    );
-};
-const Status = (scale, props) => {
-    const flatten = list => list.reduce(
-        (a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), []
-    );
-    const cards = flatten(props.cards);
-    const opened = cards.filter(x=>x.opened);
-    return h(
-        'div.status',
-        [
-            h('div.firstLine',
-                [
-                    h('span.cardTitle', 'Cards', {style: `font-size:${Math.ceil(scale * 13)}`}),
-                    h('span.cardStats', `${opened.length}/${cards.length}`, {style: `font-size:${Math.ceil(scale * 13)}`})
-                ]
-            ),
-            Progress(cards.length, opened.length)
-        ]);
-};
-const Info = (scale, props) => {
-    const height = Math.ceil(192 * scale);
-    return h('div.info',
-        [
-            h('div.logo',
-                {
-                    style: {
-                        height: `${height}px`
-                    }
-                }
-            ),
-            Status(scale, props)
-        ]
-    );
-};
+
 const ProgressInfo = (scale, items, groupIcon) => {
 
     const color = groupIcon === 0 || groupIcon === 3 ? 'black' : 'red';
@@ -256,4 +214,4 @@ const Main = (height, width, items) => {
         }
     })
 };
-export {Main, Button, ActionCard, Card, Spinner, DialogCover, ProgressComposite, Info};
+export {Main, Button, ActionCard, Card, Spinner, DialogCover, ProgressComposite};
