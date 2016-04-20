@@ -1,8 +1,6 @@
 import {Card, ActionCard, ProgressComposite, Main, DialogCover} from './UI';
 import config from '../config';
-const flatten = list => list.reduce(
-    (a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), []
-);
+import {flatten} from '../util/ArrayUtils';
 
 const deck = (element, board, action) => {
     const ORIGINAL_WIDTH = 1100;
