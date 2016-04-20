@@ -1,6 +1,7 @@
-import {Card, ActionCard, ProgressComposite, Main, DialogCover} from './UI';
+import {Card, ActionCard, ProgressComposite, Main} from './UI';
 import config from '../config';
 import {flatten} from '../util/ArrayUtils';
+import DialogCover from './dialog/dialog';
 
 const deck = (element, board, action) => {
     const ORIGINAL_WIDTH = 1100;

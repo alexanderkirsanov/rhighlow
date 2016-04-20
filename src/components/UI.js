@@ -19,25 +19,7 @@ const cardStyle = (props)=> {
     };
 };
 const Card = (props)=> h(`div.${props.className}`, cardStyle(props));
-const DialogCover = (scale, props)=>h('div.dialogCover',
-    [
-        h('div.dialogBody', [
-            h('div.dialogText', props.dialogText.map((text, index)=> h('p', text)),
-                {style: `font-size:${Math.ceil(scale * 32)}px`}),
-            h('div.dialogExtraText', props.dialogExtraText.map((text, index)=> h('p', text)), {style: `font-size: ${Math.ceil(scale * 32)}px`}),
-            h('div.dialogButton', props.dialogButtonText, {
-                onclick: props.dialogOnClick,
-                style: `font-size:${Math.ceil(scale * 32)}px`
-            })
-        ], {
-            style: {
-                top: `${props.dialogTop}px`,
-                left: `${props.dialogLeft}px`,
-                padding: `${scale * 40}px`
-            }
-        })
-    ]
-);
+
 const Score = (scale, props)=> h('div',
     [h('div.scoreTitle', 'SCORE', {
         style: {
@@ -214,4 +196,4 @@ const Main = (height, width, items) => {
         }
     })
 };
-export {Main, Button, ActionCard, Card, Spinner, DialogCover, ProgressComposite};
+export {Main, Button, ActionCard, Card, Spinner, ProgressComposite};
