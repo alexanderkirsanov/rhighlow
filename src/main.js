@@ -1,6 +1,6 @@
 import {Spinner} from './components/UI';
 import config from './config';
-import ImageLoader from './imageLoader';
+import ImageLoader from './util/imageLoader';
 import Game from './game';
 
 const GameLoader = (element) => {
