@@ -1,5 +1,4 @@
 import config from '../config';
-import Info from './statistic/info';
 import h from 'hyperscript'
 
 const cardStyle = (props)=> {
@@ -20,20 +19,6 @@ const cardStyle = (props)=> {
 };
 const Card = (props)=> h(`div.${props.className}`, cardStyle(props));
 
-const Score = (scale, props)=> h('div',
-    [h('div.scoreTitle', 'SCORE', {
-        style: {
-            'font-size': `${Math.ceil(16 * scale)}px`,
-            'padding-top': `${Math.ceil(20 * scale)}px`
-        }
-    }),
-        h('div.score', props.score, {
-            style: {
-                'font-size': `${Math.ceil(60 * scale)}px`
-            }
-        })
-    ]
-);
 
 const Button = (props)=> h(`div.button.${props.className}`, h('div', props.label, {
         style: {
@@ -122,68 +107,6 @@ const ActionCard = (props) => {
     });
 };
 
-const ProgressInfo = (scale, items, groupIcon) => {
-
-    const color = groupIcon === 0 || groupIcon === 3 ? 'black' : 'red';
-    const createStyle = (prop)=> {
-        const result = [];
-        result.push(prop.opened ? 'opened' : 'notopened');
-        if (prop.preLast) {
-            result.push('selected');
-        }
-        return result.join('.')
-    };
-    const createItem = (item) => h(`div.color-${color}.cell.${createStyle(item)}`, item.face, {
-        style: {
-            height: `${Math.ceil(25 * scale)}px`,
-            'font-size': `${Math.ceil(20 * scale)}px`
-        }
-    });
-    const firstPart = items.filter((x, index)=> {
-        return index <= 6
-    }).map(createItem);
-    const secondPart = items.filter((x, index)=> {
-        return index > 6
-    }).map(createItem);
-
-    return h('div.progressInfo',
-        [
-            h('div.icon', {
-                style: {
-                    width: `${Math.ceil(scale * 50)}px`,
-                    height: `${Math.ceil(scale * 50)}px`,
-                    'background-image': `url('resources/images/card-type-${groupIcon}.png')`,
-                    'background-repeat': 'no-repeat',
-                    'background-size': '100% 100%'
-                }
-            }),
-            h('div.items', [...firstPart, ...secondPart])
-        ], {
-            style: {
-                padding: `${Math.ceil(scale * 25)}px ${Math.ceil(scale * 25)}px ${Math.ceil(scale * 10)}px ${Math.ceil(scale * 25)}px`
-            }
-        }
-    );
-};
-const ProgressComposite = (state)=> {
-    const ORIGINAL_WIDTH = 295;
-    const scale = state.width / ORIGINAL_WIDTH;
-    const items = [Info(scale, state)];
-    state.cards.forEach((cardSet, index)=> {
-        items.push(ProgressInfo(scale, cardSet, index))
-    });
-    items.push(Score(scale, state));
-    return h('div.progressComposite', items, {
-        style: {
-            position: 'absolute',
-            width: `${state.width}px`,
-            left: '0px',
-            top: '0px',
-            height: `${state.height}px`
-        }
-    })
-};
-
 const Spinner = ()=> {
     const items = [1, 2, 3, 4, 5].map(i=> h(`div.rect${i}`));
     return h('div.spinner', items);
@@ -196,4 +119,4 @@ const Main = (height, width, items) => {
         }
     })
 };
-export {Main, Button, ActionCard, Card, Spinner, ProgressComposite};
+export {Main, Button, ActionCard, Card, Spinner};

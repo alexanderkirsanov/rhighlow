@@ -1,7 +1,8 @@
-import {Card, ActionCard, ProgressComposite, Main} from './UI';
+import {Card, ActionCard, Main} from './UI';
 import config from '../config';
 import {flatten} from '../util/ArrayUtils';
 import DialogCover from './dialog/dialog';
+import ProgressComposite from './progress/ProgressComposite';
 
 const deck = (element, board, action) => {
     const ORIGINAL_WIDTH = 1100;
@@ -86,7 +87,8 @@ const deck = (element, board, action) => {
         const ORIGINAL_LEFT = 0;
         const ORIGINAL_HEIGHT = 700;
         const coordinates = getCoordinates(ORIGINAL_LEFT, ORIGINAL_INFO_WIDTH, ORIGINAL_HEIGHT);
-        return ProgressComposite(Object.assign(coordinates, state));
+        const scale = coordinates.width / ORIGINAL_INFO_WIDTH;
+        return ProgressComposite(scale, Object.assign(coordinates, state));
     };
     const render = (state) => {
         const {cardImages} = state;
